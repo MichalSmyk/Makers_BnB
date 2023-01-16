@@ -2,14 +2,29 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
+ruby '3.1.0'
 
-gem "sinatra", "~> 2.2"
-gem "sinatra-contrib", "~> 2.2"
-gem "pg", "~> 1.3"
-gem "webrick", "~> 1.7"
-gem "rack-test", "~> 1.1"
 
-gem "rspec", "~> 3.11"
-
+gem "sinatra"
+gem "sinatra-contrib"
+gem "pg"
+gem "rack-contrib"
+gem "rack-cors"
+gem "activerecord"
+gem "sinatra-activerecord"
+gem "rake"
+gem "require_all"
+gem "faker"
+gem "bcrypt"
+gem "webrick"
+gem "mail"
 gem "rainbow", "~> 3.1"
+
+group :test do
+  gem "database_cleaner"
+  gem "rack-test"
+  gem "rspec"
+  gem "rspec-json_expectations"
+  gem 'simplecov', require: false
+  gem 'simplecov-console', require: false
+end

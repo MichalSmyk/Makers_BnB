@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  database: makersbnb-development
+
+development:
+  <<: *default
+  database: makersbnb-development
+
+test:
+  <<: *default
+  database: makersbnb-test
+
+deployment:
+  adapter: postgresql
+  encoding: unicode
+  database: makersbnb-deployment
+  pool: 5
+  host: <%= ENV['DATABASE_HOST'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
