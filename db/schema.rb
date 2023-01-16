@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_173227) do
     t.datetime "stay_date", precision: nil
     t.datetime "request_time", precision: nil
     t.string "request_approval"
+    t.integer "space_id"
+    t.integer "user_id"
   end
 
   create_table "space_dates", force: :cascade do |t|
@@ -29,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_173227) do
     t.string "name"
     t.string "description"
     t.money "price", scale: 2
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,5 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_173227) do
     t.string "mobile_number"
   end
 
+  add_foreign_key "bookings", "spaces"
+  add_foreign_key "bookings", "users"
   add_foreign_key "space_dates", "spaces"
+  add_foreign_key "spaces", "users"
 end
