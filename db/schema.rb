@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_16_171202) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_16_173227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_171202) do
     t.datetime "stay_date", precision: nil
     t.datetime "request_time", precision: nil
     t.string "request_approval"
+  end
+
+  create_table "space_dates", force: :cascade do |t|
+    t.datetime "date_available", precision: nil
+    t.integer "space_id"
   end
 
   create_table "spaces", force: :cascade do |t|
@@ -35,4 +40,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_171202) do
     t.string "mobile_number"
   end
 
+  add_foreign_key "space_dates", "spaces"
 end

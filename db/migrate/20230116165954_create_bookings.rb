@@ -4,6 +4,8 @@ class CreateBookings < ActiveRecord::Migration[7.0]
       t.timestamp :stay_date
       t.timestamp :request_time
       t.string :request_approval
+      t.int :space_id
+      t.int :user_id
     end
     add_foreign_key :bookings, :users
     add_foreign_key :bookings, :spaces

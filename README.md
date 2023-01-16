@@ -1,3 +1,25 @@
+### ActiveRecord Local Project Setup
+
+1. Create databases (makersbnb-development, makersbnb-test)
+2. Run command:
+
+```
+bundle install
+```
+3. Run command:
+
+```
+rake db:migrate
+```
+4. Run command:
+
+```
+rake db:seed (once we have written the seeds!)
+```
+
+
+
+
 # MakersBnB Project Seed
 
 This repo contains the seed codebase for the MakersBnB project in Ruby (using Sinatra and RSpec).
