@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'simplecov-console'
 require 'rack/test'
+require 'sinatra/activerecord'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
