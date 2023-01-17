@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
+      "/Users/michalsmyk/makers/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
         "lines": [
           1,
           1,
@@ -28,21 +28,24 @@
           1,
           1,
           null,
-          0,
+          1,
           null,
-          0,
+          1,
           null,
           null,
           null
         ]
       },
-      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
+      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
           1,
           1,
-          null,
+          1,
+          1,
+          1,
+          1,
           null,
           1,
           1,
@@ -58,17 +61,19 @@
           null,
           1,
           1,
-<<<<<<< HEAD
-=======
           1,
           1,
           1,
->>>>>>> cc0081c2766add01aa8bbe818941c9bafff6bd18
+          1,
+          null,
+          null,
+          null,
+          null,
           null,
           null
         ]
       },
-      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/config/environment.rb": {
+      "/Users/michalsmyk/makers/makersbnb-ruby-seed/config/environment.rb": {
         "lines": [
           1,
           null,
@@ -84,7 +89,7 @@
           1
         ]
       },
-      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/models/booking.rb": {
+      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/booking.rb": {
         "lines": [
           1,
           1,
@@ -92,21 +97,21 @@
           null
         ]
       },
-      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/models/space.rb": {
+      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/space.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/models/space_date.rb": {
+      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/space_date.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/models/user.rb": {
+      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -119,10 +124,6 @@
         ]
       }
     },
-<<<<<<< HEAD
-    "timestamp": 1673964693
-=======
-    "timestamp": 1673964460
->>>>>>> cc0081c2766add01aa8bbe818941c9bafff6bd18
+    "timestamp": 1673972779
   }
 }

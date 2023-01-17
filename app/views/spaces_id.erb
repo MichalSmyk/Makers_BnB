@@ -10,8 +10,15 @@
        The host for this space is: <%= @user.username %>  <!-- add link for account page -->
     </p> 
   <p>
-  <h3> Availablity </h3>
-Dates available to rent: <%= @available %>
-  </p>       
+      Dates available to rent: <%= @dates.date_available %> <br>
+      Description: <%= @space.description %> <br>
+      Price: <%= "£ #{@space.price}" %>
+  </p> 
+
+  <div>
+  <form method="POST" action="/space/<%=@space.id%>">
+    <input name="form" type="submit" value="Request this space" />
+</form>
+  </div>
  </body>
 </html>

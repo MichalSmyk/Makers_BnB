@@ -19,13 +19,23 @@ describe ApplicationController do
 
 
 
-  context 'get\space' do 
+  context 'get/space/:id' do 
     it 'should get to space page ' do 
-      response = get('/space') 
+      response = get('/space/1') 
 
       expect(response.status).to eq(200)
       
-      expect(response.body).to include('<h1> This is the title </h1>')
+      expect(response.body).to include('Description')
+    end
+  end
+
+  context 'POST /space ' do 
+    it 'sends request to book specific space ' do 
+      response = post('/space/1')
+
+      expect(response.status).to eq(200)
+
+    
     end
   end
 end
