@@ -4,6 +4,7 @@ require 'sinatra/activerecord'
 require_relative '../../config/environment'
 require_relative '../helpers/session_helper'
 
+
 class ApplicationController < Sinatra::Base
   include SessionHelper
   enable :sessions
