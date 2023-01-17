@@ -31,6 +31,12 @@ describe ApplicationController do
       expect(response.body).to include 'You are logged in as'
     end
 
+    it 'remains logged in when navigating site' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/')
+      expect(response.body).to include 'You are logged in as'
+    end
+
     it 'will not signin with invalid credentials' do
       response = post('/login', username: 'abodian', password: 'wrong')
       expect(response.status).to eq(200)
@@ -40,7 +46,7 @@ describe ApplicationController do
 
   context 'GET to /logout' do
     it 'removes session variables' do
-      post '/signin', { username: 'abodian', password: 'test' }
+      post '/login', { username: 'abodian', password: 'test' }
       response = get('/logout')
       expect(last_response.location).to eq 'http://example.org/'
       expect(session[:user_id]).to eq nil
