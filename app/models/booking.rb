@@ -1,4 +1,4 @@
-class Request < ActiveRecord::Base
+class Booking < ActiveRecord::Base
   belongs_to :user
   belongs_to :space
 end

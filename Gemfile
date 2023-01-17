@@ -19,6 +19,7 @@ gem "require_all"
 gem "faker"
 gem "bcrypt"
 gem "webrick"
+gem "database_cleaner"
 
 
 group :development do
@@ -28,7 +29,7 @@ end
 
 # These gems will only be used when we are running tests
 group :test do
-  gem "database_cleaner"
+
   gem "rack-test"
   gem "rspec"
   gem "rspec-json_expectations"

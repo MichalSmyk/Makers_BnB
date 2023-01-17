@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_173227) do
     t.string "name"
     t.string "description"
     t.money "price", scale: 2
+    t.string "address"
     t.integer "user_id"
   end
 
