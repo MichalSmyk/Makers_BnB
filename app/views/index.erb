@@ -1,4 +1,22 @@
 <body>
-<% @user.each do |user|%>
-<% user.first_name, user.last_name %>
+<% if logged_in? %>
+        <div>You are logged in as: <%= current_user.username %></div>
+        <p><a href="/logout">Sign Out</a></p>
+      <% else %>
+        <form action='/login' method='POST'>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <input type="submit" value="Log in!">
+        </form>
+  <a href= '/signup'>Click here to sign up</a>
+  <% end %>
+<h1>Welcome to MakersBnB!</h1>
+
+  <h2>Check out these spaces below:</h2>
+  <ul><% @spaces.each do |space| %>
+     <li><a href = '/space/<%=space.id%>'><%= space.name %></a> </li>
+  <% end %>
+ </ul>
 </body>
