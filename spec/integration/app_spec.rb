@@ -1,23 +1,58 @@
-require "spec_helper"
-require "rack/test"
+require 'spec_helper'
+require 'rack/test'
 require_relative '../../app/controllers/application_controller'
 require 'json'
 require "sinatra/base"
 require "sinatra/activerecord"
 
 describe ApplicationController do
-  # This is so we can use rack-test helper methods.
   include Rack::Test::Methods
 
-  # We need to declare the `app` value by instantiating the Application
-  # class so our tests work.
   let(:app) { ApplicationController.new }
+  context 'GET /' do
+    it 'should get the homepage' do
+      response = get('/')
+      expect(response.status).to eq(200)
+      expect(response.body).to include '<h1>Welcome to MakersBnB!</h1>'
+    end
+    it 'should display a login field and a link to sign-up page' do
+      response = get('/')
+      expect(response.body).to include "<form action='/login' method='POST'>"
+      expect(response.body).to include "<a href= '/signup'>Click here to sign up</a>"
+    end
+    it 'should provide a list of spaces' do
+      response = get('/')
+      expect(response.body).to include 'Lovely Cottage'
+    end
+  end
+  context 'POST to /login' do
+    it 'logs in with valid credentials' do
+      response = post('/login', username: 'abodian', password: 'test')
+      expect(response.status).to eq(200)
+      expect(response.body).to include 'You are logged in as'
+    end
 
-  # Write your integration tests below.
-  # If you want to split your integration tests
-  # accross multiple RSpec files (for example, have
-  # one test suite for each set of related features),
-  # you can duplicate this test file to create a new one.
+    it 'remains logged in when navigating site' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/')
+      expect(response.body).to include 'You are logged in as'
+    end
+
+    it 'will not signin with invalid credentials' do
+      response = post('/login', username: 'abodian', password: 'wrong')
+      expect(response.status).to eq(200)
+      expect(response.body).not_to include 'You are logged in as'
+    end
+  end
+
+  context 'GET to /logout' do
+    it 'removes session variables' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/logout')
+      expect(last_response.location).to eq 'http://example.org/'
+      expect(session[:user_id]).to eq nil
+    end
+  end
 
   context 'GET /signup' do
     it 'should get the signup page as not logged in' do
@@ -28,14 +63,14 @@ describe ApplicationController do
       expect(response.body).to include('<input name="password" type="password" placeholder="Password" />')
     end
 
-    # it 'should return home_page_redirect view due to already being logged in' do
-    #   post("/login", username: "abodian", password: "test" )
-    #   response = get('/signup')
+    it 'should return home_page_redirect view due to already being logged in' do
+      post("/login", username: "abodian", password: "test" )
+      response = get('/signup')
       
-    #   expect(response.status).to eq(200)
-    #   expect(response.body).to include('You are currently logged in therefore cannot sign up. Redirecting to homepage...')
-    #   expect(response.body).to include('<meta http-equiv="refresh" content="2; url = /" />')
-    # end
+      expect(response.status).to eq(200)
+      expect(response.body).to include('You are currently logged in therefore cannot sign up. Redirecting to homepage...')
+      expect(response.body).to include('<meta http-equiv="refresh" content="3; url = /" />')
+    end
   end
 
   context 'POST /signup' do
