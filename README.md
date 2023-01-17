@@ -16,7 +16,11 @@ rake db:migrate
 ```
 rake db:seed (once we have written the seeds!)
 ```
-
+5. Migrate and seed the test database
+```
+rake RACK_ENV="test" db:migrate
+rake RACK_ENV="test" db:seed
+```
 
 
 

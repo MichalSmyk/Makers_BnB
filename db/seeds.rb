@@ -5,6 +5,8 @@ puts "🌱 Seeding spices..."
 
 DatabaseCleaner.clean_with(:truncation)
 
+
+
 20.times do
   User.create(
     username: Faker::Internet.unique.username,
