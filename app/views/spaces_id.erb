@@ -5,7 +5,8 @@
  <body>
    <h1> <%= @space.name %> </h1>
    <p>
-       The owner for this space is: <%= @user.username %>  <!-- add link for account page -->
+   <h3> Host </h3>
+       The host for this space is: <%= @user.username %>  <!-- add link for account page -->
     </p> 
   <p>
       Availability: <%=formatted_timestamp = @dates.date_available.strftime("%d/%h/%Y") %> <br>
