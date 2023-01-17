@@ -15,8 +15,8 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get '/' do
-    @user = Users.all
-    return erb(:index)
-  end
+
+  get '/space' do 
+    erb :space
+  end 
 end
