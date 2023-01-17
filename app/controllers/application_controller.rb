@@ -2,7 +2,10 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require "sinatra/activerecord"
 require_relative "../../config/environment"
-
+require_relative '../models/user'
+require_relative '../models/booking'
+require_relative '../models/space_date'
+require_relative '../models/space'
 
 class ApplicationController < Sinatra::Base
   enable :sessions
@@ -17,9 +20,9 @@ class ApplicationController < Sinatra::Base
 
 
   get '/space/:id' do 
-    @user = User.new #so you can see user from space page
-    @availability = SpaceDate.new #so you can see availability on the space page
-    @space = Space.new #so you can see info about the listing
+    @space = Space.find_by(id: params[:id])
+    @user = @space.user
+    # @user = Space(params[:id]).user #so you can see user from space page
     erb :spaces_id
   end 
 
