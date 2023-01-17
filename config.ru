@@ -5,4 +5,8 @@ require './app/models/booking'
 require './app/models/space'
 require './app/models/user'
 require './app/models/space_date'
+
 run ApplicationController
+
+
+
