@@ -14,7 +14,7 @@ rake db:migrate
 4. Run command:
 
 ```
-rake db:seed (once we have written the seeds!)
+rake db:seed
 ```
 5. Migrate and seed the test database
 ```
