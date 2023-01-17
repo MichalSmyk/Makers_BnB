@@ -9,8 +9,8 @@
   </form>
   <a href= '/signup'>Click here to sign up</a>
   <h2>Check out these spaces below:</h2>
-  <% @spaces.each do |space| %>
-    <p> <a href = '/space/<%=space.id%>'><%= space.name %></a> </p>
+  <ul><% @spaces.each do |space| %>
+     <li><a href = '/space/<%=space.id%>'><%= space.name %></a> </li>
   <% end %>
-  
+ </ul>
 </body>
