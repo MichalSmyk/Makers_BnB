@@ -17,6 +17,12 @@ class ApplicationController < Sinatra::Base
 
 
   get '/space' do 
+    @user = User.new #so you can see user from space page
+    @availability = SpaceDate.new #so you can see availability on the space page
+    @space = Space.new #so you can see info about the listing
     erb :space
   end 
+
+
+
 end

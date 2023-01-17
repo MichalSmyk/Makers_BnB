@@ -24,8 +24,8 @@ describe ApplicationController do
       response = get('/space') 
 
       expect(response.status).to eq(200)
-      # TODO
-      expect(response.body).to include('')
+      
+      expect(response.body).to include('<h1> This is the title </h1>')
     end
   end
 end
