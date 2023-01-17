@@ -2,8 +2,10 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra/activerecord'
 require_relative '../../config/environment'
+require_relative '../helpers/session_helper'
 
 class ApplicationController < Sinatra::Base
+  include SessionHelper
   enable :sessions
   register Sinatra::ActiveRecordExtension
   configure :development do
@@ -17,6 +19,18 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     @spaces = Space.all
-    return erb(:index)
+    @users = User.all
+    erb(:index)
+  end
+
+  post '/login' do
+    log_in
+    @spaces = Space.all
+    erb(:index)
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
   end
 end

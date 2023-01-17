@@ -24,4 +24,23 @@ describe ApplicationController do
       expect(response.body).to include 'Lovely Cottage'
     end
   end
+  context 'POST to /login' do
+    it 'logs in with valid credentials' do
+      response = post('/login', username: 'abodian', password: 'test')
+      expect(last_response.body).to include 'You are logged in as'
+    end
+
+    it 'will not signin with invalid credentials' do
+      response = post('/login', username: 'abodian', password: 'wrong')
+      expect(response.body).not_to include 'You are logged in as'
+    end
+  end
+
+  context 'GET to /logout' do
+    it 'removes session variables' do
+      post '/signin', { username: 'abodian', password: 'test' }
+      response = get('/logout')
+      expect(session[:user_id]).to eq nil
+    end
+  end
 end
