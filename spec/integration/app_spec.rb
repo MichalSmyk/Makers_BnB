@@ -31,11 +31,12 @@ describe ApplicationController do
 
   context 'POST /space ' do 
     it 'sends request to book specific space ' do 
-      response = post('/space/1')
+      response = post('/space/1', stay_date: "15-01-2023", request_time: "24-12-2022", request_approval: "31-12-2022",
+        space_id: "2", user_id: "2")
 
       expect(response.status).to eq(200)
-
-    
+      expect(response.body).to include('<h1>You have booked this space</h1>')
+      
     end
   end
 end
