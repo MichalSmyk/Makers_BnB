@@ -37,6 +37,8 @@ class ApplicationController < Sinatra::Base
       erb(:sign_up_blank)
     elsif params[:password] != params[:repeat_password]
       erb(:sign_up_password_fail)
+    elsif User.find_by(username: params[:username])
+      erb(:username_taken)
     else
       @user = User.create(username: params[:username], email: params[:email], 
         password: params[:password], first_name: params[:first_name], last_name: params[:last_name])

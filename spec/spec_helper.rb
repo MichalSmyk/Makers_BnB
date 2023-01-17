@@ -1,7 +1,11 @@
+ENV['RACK_ENV'] = "test"
+
 require 'simplecov'
 require 'simplecov-console'
 require 'rack/test'
 require 'sinatra/activerecord'
+
+ENV['RACK_ENV'] = "test"
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
@@ -9,8 +13,6 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   # SimpleCov::Formatter::HTMLFormatter
 ])
 SimpleCov.start
-
-ENV['RACK_ENV'] = "test"
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods

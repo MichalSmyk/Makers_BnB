@@ -67,5 +67,14 @@ describe ApplicationController do
         expect(response.body).to include('You cannot leave any of the fields blank, please try again...')
       end
     end
+
+    describe "the username the new user is trying to use is already taken" do
+      it 'account not created and username_taken view is returned' do
+        response =  post('/signup', username: "abodian", password: "Web", repeat_password: "Web", first_name: "Peter", last_name: "Parker", email: "webslinger@dailyplanet.net", mobile_number: "696969")
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('Sorry, that username is taken...')
+      end
+    end
   end
 end
