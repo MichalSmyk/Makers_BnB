@@ -4,7 +4,7 @@ require "sinatra/activerecord"
 require_relative "../../config/environment"
 
 
-class Application < Sinatra::Base
+class ApplicationController < Sinatra::Base
   enable :sessions
   register Sinatra::ActiveRecordExtension
   configure :development do
