@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
+      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
         "lines": [
           1,
           1,
@@ -28,15 +28,15 @@
           1,
           1,
           null,
-          1,
+          0,
           null,
-          1,
+          0,
           null,
           null,
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
+      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -57,12 +57,12 @@
           null,
           null,
           1,
-          null,
+          1,
           null,
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/config/environment.rb": {
+      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/config/environment.rb": {
         "lines": [
           1,
           null,
@@ -78,7 +78,7 @@
           1
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/booking.rb": {
+      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/models/booking.rb": {
         "lines": [
           1,
           1,
@@ -86,21 +86,21 @@
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/space.rb": {
+      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/models/space.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/space_date.rb": {
+      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/models/space_date.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/user.rb": {
+      "/Users/userchi/Desktop/Makers/makersbnb-ruby-seed/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -113,6 +113,6 @@
         ]
       }
     },
-    "timestamp": 1673963820
+    "timestamp": 1673964693
   }
 }
