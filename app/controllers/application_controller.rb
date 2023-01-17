@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
   get '/space/:id' do 
     @space = Space.find_by(id: params[:id])
     @user = @space.user
-    # @user = Space(params[:id]).user #so you can see user from space page
+    @available = @space.space_date
     erb :spaces_id
   end 
 
