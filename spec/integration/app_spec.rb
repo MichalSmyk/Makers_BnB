@@ -148,7 +148,7 @@ describe ApplicationController do
   end
 
   context 'get /stays-management' do
-    xit 'lists all pending stay requests for the user' do
+    it 'lists all pending stay requests for the user' do
       post('/login', username: 'abodian', password: 'test')
       response = get('/stays-management')
 

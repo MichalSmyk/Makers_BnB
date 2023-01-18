@@ -52,19 +52,8 @@ module SessionHelper
     @user = @space.user
   end
 
-  def book_space_request
-    @booking = Booking.create(stay_date: @space.stay_date, request_time: Time.now,
-      request_approval: "1", space_id: @space.id, user_id: @space.user.id)
-  end
-
-  # def approvals 
-  #   Booking.find_by(request_approval: params[:request_approval])
-  #   if request_approval == 1 
-  #     return "Pending"
-  #   elsif request_approval == 2 
-  #     return "Accepted"
-  #   else
-  #     return "Declined"
-  #   end
-  # end 
+  # def book_space_request
+  #   @booking = Booking.create(stay_date: @space.stay_date, request_time: Time.now,
+  #     request_approval: "1", space_id: @space.id, user_id: @space.user.id)
+  # end
 end

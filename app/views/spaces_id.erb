@@ -10,17 +10,21 @@
     </p> 
   <p>
       <p><strong> Availability: </strong></p>
-      <%@dates.each do |date|%>
-        <%=formatted_timestamp = date.date_available.strftime("%d-%m-%Y")%><br>
-      <%end%> <br>
-      <h3Description: <%= @space.description %> <br>
+      <%@dates.each do |date|
+        formatted_date = date.date_available.strftime("%d-%m-%Y") %>
+        <%= formatted_date %><br>
+      <%end%></p>
+
+      <strong>Description:</strong> <%= @space.description %> <br>
       <strong>Price:</strong> <%= "£#{'%.2f' % @space.price}" %>
   </p> 
 
   <div>
-  <form method="POST" action="/space/<%=@space.id%>">
+  
   <% if  logged_in? %>
-    <input name="form" type="submit" value="Request this space" /> 
+    <form action="/space/book/<%=@space.id%>">
+    <input type="submit" value="Go to booking page" />
+</form>
   <% else %>
   <a href='/signup'>Sign up to request this space if you do not have an account</a><br>
   or<br>
