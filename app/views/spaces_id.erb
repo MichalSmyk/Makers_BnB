@@ -19,7 +19,9 @@
   <% if  logged_in? %>
     <input name="form" type="submit" value="Request this space" /> 
   <% else %>
-  <a href='/signup'>Sign up to request this space</a>
+  <a href='/signup'>Sign up to request this space if you do not have an account</a><br>
+  or<br>
+  <a href='/'>Log in to request this space</a>
   <% end %>
 </form>
   </div>
