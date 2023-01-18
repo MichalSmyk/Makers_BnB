@@ -18,14 +18,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    @spaces = Space.all
-    erb(:index)
+    load_homepage
   end
 
   post '/login' do
     log_in
-    @spaces = Space.all
-    erb(:index)
+    load_homepage
   end
 
   get '/logout' do
@@ -54,24 +52,17 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/space/:id' do 
-    @space = Space.find_by(id: params[:id])
-    @ava = SpaceDate.find_by(id: params[:id])
-    @user = @space.user
-    @dates = @ava
-    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time],
-      request_approval: params[:request_approval], space_id: params[:space_id], user_id: params[:user_id])
+  get '/space/:id' do
+    load_space
     erb :spaces_id
-  end 
+  end
 
-  post '/space/:id' do 
+  post '/space/:id' do
     @space = Space.find_by(id: params[:id])
-    @user = current_user
     if logged_in?
       erb(:booking_confirmation)
     else
       erb(:signup)
     end
-  end 
-
+  end
 end
