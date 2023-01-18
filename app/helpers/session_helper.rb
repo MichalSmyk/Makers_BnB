@@ -40,4 +40,15 @@ module SessionHelper
       
     session[:user_id] = @user.id 
   end
+
+  # def approvals 
+  #   Booking.find_by(request_approval: params[:request_approval])
+  #   if request_approval == 1 
+  #     return "Pending"
+  #   elsif request_approval == 2 
+  #     return "Accepted"
+  #   else
+  #     return "Declined"
+  #   end
+  # end 
 end

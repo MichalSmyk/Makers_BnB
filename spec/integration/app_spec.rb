@@ -86,6 +86,7 @@ describe ApplicationController do
       end
     end
 
+
     context 'GET to /myaccount' do
       it 'directs to the correct account page with correct details' do
         post '/login', { username: 'abodian', password: 'test' }
@@ -104,6 +105,7 @@ describe ApplicationController do
         expect(response.body).to include "<a href= '/rentals-management'>"
       end
     end
+
 
     describe 'password and repeat password are not the same' do
       it 'account not created and sign_up_password_fail view is returned' do
@@ -136,33 +138,44 @@ describe ApplicationController do
     end
   end
 
-  context 'get/space/:id' do 
-    it 'should get to space page ' do 
-      response = get('/space/1') 
+  context 'get/space/:id' do
+    it 'should get to space page ' do
+      response = get('/space/1')
 
       expect(response.status).to eq(200)
       expect(response.body).to include('Description')
     end
   end
 
-  context 'POST /space ' do 
-    it 'sends request to book specific space  if user is logged in' do 
-      post("/login", username: "abodian", password: "test" )
-      response = post('/space/1', stay_date: "20-02-2023", request_time: "19-01-2023", request_approval: "1",
-        space_id: "1", user_id: "1")
+  context 'POST /space ' do
+    it 'sends request to book specific space  if user is logged in' do
+      post('/login', username: 'abodian', password: 'test')
+      response = post('/space/1', stay_date: '20-02-2023', request_time: '19-01-2023', request_approval: '1',
+                                  space_id: '1', user_id: '1')
 
       expect(response.status).to eq(200)
-      expect(response.body).to include("<title>Booking confirmation</title>")
+      expect(response.body).to include('<title>Booking confirmation</title>')
 
-      booking = Booking.find_by(user_id: "1")
+      booking = Booking.find_by(user_id: '1')
     end
 
-    it 'returns to sign up page if person requesting booking is not logged in' do 
-       response = post('/space/1', stay_date: "20-02-2023", request_time: "19-01-2023", request_approval: "1",
-        space_id: "1", user_id: "1")
+    it 'returns to sign up page if person requesting booking is not logged in' do
+      response = post('/space/1', stay_date: '20-02-2023', request_time: '19-01-2023', request_approval: '1',
+                                  space_id: '1', user_id: '1')
 
-      expect(response.status).to eq (200)
+      expect(response.status).to eq(200)
       expect(response.body).to include('<h1>Sign Up - Create a new MakersBnB Account</h1>')
+    end
+  end
+
+  context 'get /stays-management' do
+    it 'lists all pending stay requests for the user' do
+      post('/login', username: 'abodian', password: 'test')
+      response = get('/stays-management')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>Your Pending Stay Requests:</h1>')
+      expect(response.body).to include('<h2>Space Name: Lovely Cottage</h2>')
     end
   end
 end

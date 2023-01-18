@@ -1,0 +1,21 @@
+<html>
+  <body>
+  <title>Welcome to your Stays Management Page</title>
+  <h1>Your Pending Stay Requests:</h1>
+
+  <% @user_bookings.each do |booking| %>
+      <h2>Space Name: <%= booking.space.name %></h2>
+      <strong>Stay Date:</strong> <%= booking.stay_date.strftime("%d/%h/%Y") %><br>
+      <strong>Stay Requested Date:</strong> <%= booking.request_time.strftime("%d/%m/%Y") %><br>
+      <% if booking.request_approval == "1" %>
+      <strong>Stay Approval Status:</strong> Pending<br>
+      <% elsif booking.request_approval == "2" %>
+      <strong>Stay Approval Status:</strong> Approved <br>
+      <% else booking.request_approval == "3" %>  
+      <strong>Stay Approval Status:</strong> Declined <br>
+      <% end %>
+      <br>
+      <input type="submit" value="Delete Booking Request" />
+  <% end %>
+  </body>
+</html>
