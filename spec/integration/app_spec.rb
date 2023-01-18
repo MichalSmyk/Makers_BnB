@@ -7,8 +7,9 @@ require "sinatra/activerecord"
 
 describe ApplicationController do
   include Rack::Test::Methods
-
+  
   let(:app) { ApplicationController.new }
+
   context 'GET /' do
     it 'should get the homepage' do
       response = get('/')
@@ -25,6 +26,7 @@ describe ApplicationController do
       expect(response.body).to include 'Lovely Cottage'
     end
   end
+  
   context 'POST to /login' do
     it 'logs in with valid credentials' do
       response = post('/login', username: 'abodian', password: 'test')
@@ -110,6 +112,35 @@ describe ApplicationController do
         expect(response.status).to eq(200)
         expect(response.body).to include('Sorry, that username is taken...')
       end
+    end
+  end
+
+  context "get /stays-management" do
+    it "lists all pending stay requests for the user" do
+      post("/login", username: "abodian", password: "test" )
+      response = get('/stays-management')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h2>Your Pending Stay Requests:</h2>')
+      expect(response.body).to include('<td>Lovely Cottage</td>')
+    end
+  end
+  
+  context 'get/space/:id' do 
+    it 'should get to space page ' do 
+      response = get('/space/1') 
+
+      expect(response.status).to eq(200)
+      
+      expect(response.body).to include('Description')
+    end
+  end
+
+  context 'POST /space ' do 
+    it 'sends request to book specific space ' do 
+      response = post('/space/1')
+
+      expect(response.status).to eq(200)
     end
   end
 end
