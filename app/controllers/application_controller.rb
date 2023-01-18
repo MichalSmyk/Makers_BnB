@@ -59,12 +59,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/space/:id' do
-    @space = Space.find_by(id: params[:id])
-    @ava = SpaceDate.find_by(id: params[:id])
-    @user = @space.user
-    @dates = @ava
-    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time],
-                              request_approval: params[:request_approval], space_id: params[:space_id], user_id: params[:user_id])
+    load_space
     erb :spaces_id
   end
 
