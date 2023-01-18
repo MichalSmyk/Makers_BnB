@@ -53,8 +53,12 @@ class ApplicationController < Sinatra::Base
       erb(:user_created)
     end
   end
+  
+  get '/myaccount' do
+    erb(:user_account)
+  end
 
-  get '/space/:id' do
+  get '/space/:id' do 
     @space = Space.find_by(id: params[:id])
     @ava = SpaceDate.find_by(id: params[:id])
     @user = @space.user
