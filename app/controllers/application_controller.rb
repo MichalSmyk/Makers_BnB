@@ -42,24 +42,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if params[:username].empty? || 
-      params[:email].empty? || 
-      params[:password].empty? || 
-      params[:repeat_password].empty? || 
-      params[:first_name].empty? || 
-      params[:last_name].empty? ||
-      params[:mobile_number].empty?
+    if sign_up_field_empty?
       erb(:sign_up_blank)
-    elsif params[:password] != params[:repeat_password]
+    elsif password_and_repeat_password_match?
       erb(:sign_up_password_fail)
-    elsif User.find_by(username: params[:username])
+    elsif username_taken?
       erb(:username_taken)
     else
-      @user = User.create(username: params[:username], email: params[:email], 
-        password: params[:password], first_name: params[:first_name], last_name: params[:last_name])
-        
-      session[:user_id] = @user.id 
-      
+      create_user_and_login
       erb(:user_created)
     end
   end
