@@ -35,13 +35,13 @@ describe ApplicationController do
     it 'remains logged in when navigating site' do
       post '/login', { username: 'abodian', password: 'test' }
       response = get('/')
-      expect(response.body).to include 'You are logged in as'
+      expect(response.body).to include 'You are logged in as:'
     end
 
     it 'will not signin with invalid credentials' do
       response = post('/login', username: 'abodian', password: 'wrong')
       expect(response.status).to eq(200)
-      expect(response.body).not_to include 'You are logged in as'
+      expect(response.body).not_to include 'You are logged in as:'
     end
   end
 
