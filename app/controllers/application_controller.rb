@@ -24,8 +24,7 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     log_in
-    @spaces = Space.all
-    erb(:index)
+    erb(:index_redirect)
   end
 
   get '/logout' do
