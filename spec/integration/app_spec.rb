@@ -131,7 +131,7 @@ describe ApplicationController do
       response = get('/space/book/1')
 
       expect(response.status).to eq(200)
-      expect(response.body).to include('     <option value="2023-03-09 00:00:00 UTC">09-03-2023</option>')
+      expect(response.body).to include('      <option value="2023-04-28 00:00:00 UTC">28-04-2023</option>')
     end
   end
 
