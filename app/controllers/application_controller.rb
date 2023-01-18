@@ -1,11 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
-require "sinatra/activerecord"
-require_relative "../../config/environment"
-require_relative '../models/user'
-require_relative '../models/booking'
-require_relative '../models/space_date'
-require_relative '../models/space'
+require 'sinatra/activerecord'
+require_relative '../../config/environment'
 require_relative '../helpers/session_helper'
 
 class ApplicationController < Sinatra::Base
@@ -15,6 +11,7 @@ class ApplicationController < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -36,6 +33,13 @@ class ApplicationController < Sinatra::Base
     redirect '/'
   end
 
+  get '/signup' do
+    if logged_in?
+      erb(:home_page_redirect)
+    else
+      erb(:signup)
+    end
+  end
 
   post '/signup' do
     if sign_up_field_empty?
@@ -49,7 +53,6 @@ class ApplicationController < Sinatra::Base
       erb(:user_created)
     end
   end
-
 
   get '/space/:id' do 
     @space = Space.find_by(id: params[:id])
@@ -74,5 +77,5 @@ class ApplicationController < Sinatra::Base
     @user = current_user
     erb :booking_confirmation
   end 
-
 end
+
