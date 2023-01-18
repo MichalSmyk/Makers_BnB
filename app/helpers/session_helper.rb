@@ -26,11 +26,11 @@ module SessionHelper
       params[:mobile_number].empty?
   end
 
-  def password_and_repeat_password_match?
-    params[:password] != params[:repeat_password]
+  def password_and_repeat_password_match
+    params[:password] == params[:repeat_password]
   end
 
-  def username_taken?
+  def username_not_available
     User.find_by(username: params[:username])
   end
 

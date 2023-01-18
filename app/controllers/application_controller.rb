@@ -44,9 +44,9 @@ class ApplicationController < Sinatra::Base
   post '/signup' do
     if sign_up_field_empty?
       erb(:sign_up_blank)
-    elsif password_and_repeat_password_match?
+    elsif !password_and_repeat_password_match
       erb(:sign_up_password_fail)
-    elsif username_taken?
+    elsif username_not_available
       erb(:username_taken)
     else
       create_user_and_login
