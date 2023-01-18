@@ -53,7 +53,7 @@ class ApplicationController < Sinatra::Base
       erb(:user_created)
     end
   end
-  
+
   get '/myaccount' do
     erb(:user_account)
   end
@@ -62,9 +62,7 @@ class ApplicationController < Sinatra::Base
     load_space
     erb :spaces_id
   end
-  end
 
-  post '/space/:id' do
   post '/space/:id' do
     @space = Space.find_by(id: params[:id])
     if logged_in?
@@ -72,7 +70,6 @@ class ApplicationController < Sinatra::Base
     else
       erb(:signup)
     end
-  end
   end
 
   get '/stays-management' do
