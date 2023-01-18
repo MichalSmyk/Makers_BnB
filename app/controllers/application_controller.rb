@@ -63,14 +63,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/space/book/:id' do
-    @space = Space.find(params[:id])
-    @dates = SpaceDate.where(space_id: params[:id]).select(:date_available).distinct.pluck(:date_available)
-    erb :book
+    book_space_date_choice
+    erb(:book)
   end
 
   post '/space/book/:id' do
-    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time], 
-      space_id: params[:space_id], user_id: params[:user_id], request_approval: '1')
+    create_new_booking
     erb(:booking_confirmation)
   end
 
