@@ -53,29 +53,4 @@ class ApplicationController < Sinatra::Base
       erb(:user_created)
     end
   end
-
-  get '/space/:id' do 
-    @space = Space.find_by(id: params[:id])
-    @ava = SpaceDate.find_by(id: params[:id])
-    @user = @space.user
-    @dates = @ava
-    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time],
-      request_approval: params[:request_approval], space_id: params[:space_id], user_id: params[:user_id])
-    erb :spaces_id
-  end 
-
-  get '/signup' do
-    if logged_in?
-      erb(:home_page_redirect)
-    else
-      erb(:signup)
-    end
-  end
-
-  post '/space/:id' do 
-    @space = Space.find_by(id: params[:id])
-    @user = current_user
-    erb :booking_confirmation
-  end 
 end
-
