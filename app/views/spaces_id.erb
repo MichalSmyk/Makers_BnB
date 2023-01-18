@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>MakersBnB-Space</title>
+ </head>
+ <body>
+   <h1> <%= @space.name %> </h1>
+   <p>
+   <h3> Host </h3>
+       The host for this space is: <%= @user.username %>  <!-- add link for account page -->
+    </p> 
+  <p>
+      Availability: <%=formatted_timestamp = @dates.date_available.strftime("%d/%h/%Y") %> <br>
+      Description: <%= @space.description %> <br>
+      Price: <%= "£#{'%.2f' % @space.price}" %>
+  </p> 
+
+  <div>
+  <form method="POST" action="/space/<%=@space.id%>">
+  <% if  logged_in? %>
+    <input name="form" type="submit" value="Request this space" /> 
+  <% else %>
+  <a href='/signup'>Sign up to request this space if you do not have an account</a><br>
+  or<br>
+  <a href='/'>Log in to request this space</a>
+  <% end %>
+</form>
+  </div>
+ </body>
+</html>
