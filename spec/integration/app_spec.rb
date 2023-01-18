@@ -2,6 +2,8 @@ require "spec_helper"
 require "rack/test"
 require_relative '../../app/controllers/application_controller'
 require 'json'
+require "sinatra/base"
+require "sinatra/activerecord"
 
 describe ApplicationController do
   # This is so we can use rack-test helper methods.
@@ -30,13 +32,23 @@ describe ApplicationController do
   end
 
   context 'POST /space ' do 
-    it 'sends request to book specific space ' do 
-      response = post('/space/1', stay_date: "15-01-2023", request_time: "24-12-2022", request_approval: "31-12-2022",
-        space_id: "2", user_id: "2")
+    it 'sends request to book specific space  if user is logged in' do 
+      response = post('/space/1', stay_date: "20-02-2023", request_time: "19-01-2023", request_approval: "1",
+        space_id: "1", user_id: "1")
 
       expect(response.status).to eq(200)
-      expect(response.body).to include('<h1>You have booked this space</h1>')
-      
+      expect(response.body).to include("<title>Booking confirmation</title>")
+
+      booking = Booking.find_by(user_id: "1")
+      booking.destroy
+
+    it 'returns to sign up page if person requesting booking is not logged in' do 
+       response = post('/space/1', stay_date: "20-02-2023", request_time: "19-01-2023", request_approval: "1",
+        space_id: "1", user_id: "1")
+
+      expect(response.status).to eq (200)
+      expect(response.body).to include('<h1>Sign Up - Create a new MakersBnB Account</h1>')
+    end
     end
   end
 end
