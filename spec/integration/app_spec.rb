@@ -117,6 +117,28 @@ describe ApplicationController do
     end
   end
 
+  context 'GET to /myaccount' do
+    it 'directs to the correct account page with correct details' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/myaccount')
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Account page for Alex Bodian'
+      expect(response.body).to include 'abodian'
+      expect(response.body).to include 'abodian@email.com'
+      expect(response.body).to include '+44714241945'
+    end
+
+    it 'includes links to home, stays management and rentals management ' do 
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/myaccount')
+      expect(response.body).to include "<a href= '/'>"
+      expect(response.body).to include "<a href= '/stays-management'>"
+      expect(response.body).to include "<a href= '/rentals-management'>"
+      expect(response.body).to include "<a href= '/myaccount-update'>" #updated details link
+    end
+  end
+
+
   context 'get/space/:id' do
     it 'should get to space page ' do
       response = get('/space/1')
