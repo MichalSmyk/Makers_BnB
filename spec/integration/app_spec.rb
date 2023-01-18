@@ -119,8 +119,8 @@ describe ApplicationController do
       response = get('/stays-management')
 
       expect(response.status).to eq(200)
-      expect(response.body).to include('<h2>Your Pending Stay Requests:</h2>')
-      expect(response.body).to include('<td>Lovely Cottage</td>')
+      expect(response.body).to include('<h1>Your Pending Stay Requests:</h1>')
+      expect(response.body).to include('<h2>Space Name: Lovely Cottage</h2>')
     end
   end
 end
