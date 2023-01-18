@@ -115,7 +115,19 @@ describe ApplicationController do
 
   context "get /stays-management" do
     it "lists all pending stay requests for the user" do
+      response = get('/stays-management')
 
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h2>Your Pending Stay Requests:</h2>')
+      expect(response.body).to include('<h3>Lovely Cottage</h3>')
     end
   end
 end
+
+  # <% @user_pending_stays.each do |stay| %>
+  #   <% stay.name %>
+  #   <% stay.title %>
+  #   <% stay.stay_date %>
+  #   <% stay.request_time %>
+  #   <% stay.request_approval %>
+  # <% end %>

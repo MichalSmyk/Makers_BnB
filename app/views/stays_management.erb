@@ -1,0 +1,22 @@
+<html>
+  <body>
+  <title>Welcome to your Stays Management Page</title>
+  <h2>Your Pending Stay Requests:</h2>
+<table>
+  <tr>
+    <th>Space Name</th>
+    <th>Stay Date</th>
+    <th>Requst Time</th>
+    <th>Request Approval</th>
+  </tr>
+  <% @user_bookings.each do |booking| %>
+    <tr>
+      <td><%= booking.space.name %></td>
+      <td><%= booking.stay_date %></td>
+      <td><%= booking.request_time %></td>
+      <td><%= booking.request_approval %></td>
+    </tr>
+  <% end %>
+</table>
+  </body>
+</html>

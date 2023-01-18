@@ -53,4 +53,11 @@ class ApplicationController < Sinatra::Base
       erb(:user_created)
     end
   end
+
+  get '/stays-management' do
+    @user_pending_stays = []
+    @user = current_user
+    @user_bookings = Booking.where(user_id: @user.id)
+    erb(:stays_management)
+  end
 end
