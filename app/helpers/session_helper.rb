@@ -48,10 +48,13 @@ module SessionHelper
 
   def load_space
     @space = Space.find_by(id: params[:id])
-    @dates = SpaceDate.find_by(id: params[:id])
+    @dates = SpaceDate.where(space_id: params[:id]).order('date_available ASC')
     @user = @space.user
-    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time],
-                              request_approval: params[:request_approval], space_id: params[:space_id], user_id: params[:user_id])
+  end
+
+  def book_space_request
+    @booking = Booking.create(stay_date: @space.stay_date, request_time: Time.now,
+      request_approval: "1", space_id: @space.id, user_id: @space.user.id)
   end
 
   # def approvals 

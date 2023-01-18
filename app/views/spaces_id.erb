@@ -5,13 +5,16 @@
  <body>
    <h1> <%= @space.name %> </h1>
    <p>
-   <h3> Host </h3>
+   <strong> Host: </strong>
        The host for this space is: <%= @user.username %>  <!-- add link for account page -->
     </p> 
   <p>
-      Availability: <%=formatted_timestamp = @dates.date_available.strftime("%d/%h/%Y") %> <br>
-      Description: <%= @space.description %> <br>
-      Price: <%= "£#{'%.2f' % @space.price}" %>
+      <p><strong> Availability: </strong></p>
+      <%@dates.each do |date|%>
+        <%=formatted_timestamp = date.date_available.strftime("%d-%m-%Y")%><br>
+      <%end%> <br>
+      <h3Description: <%= @space.description %> <br>
+      <strong>Price:</strong> <%= "£#{'%.2f' % @space.price}" %>
   </p> 
 
   <div>

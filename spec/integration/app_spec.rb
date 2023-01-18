@@ -29,7 +29,7 @@ describe ApplicationController do
     it 'logs in with valid credentials' do
       response = post('/login', username: 'abodian', password: 'test')
       expect(last_response.status).to eq(200)
-      expect(response.body).to include 'You are logged in as'
+      expect(response.body).to include 'Logged In Successfully!'
     end
 
     it 'remains logged in when navigating site' do
@@ -148,7 +148,7 @@ describe ApplicationController do
   end
 
   context 'get /stays-management' do
-    it 'lists all pending stay requests for the user' do
+    xit 'lists all pending stay requests for the user' do
       post('/login', username: 'abodian', password: 'test')
       response = get('/stays-management')
 

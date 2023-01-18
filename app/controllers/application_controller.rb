@@ -65,6 +65,7 @@ class ApplicationController < Sinatra::Base
   post '/space/:id' do
     @space = Space.find_by(id: params[:id])
     if logged_in?
+      book_space_request
       erb(:booking_confirmation)
     else
       erb(:signup)
@@ -73,7 +74,18 @@ class ApplicationController < Sinatra::Base
 
   get '/stays-management' do
     @user_pending_stays = []
+    @user_confirmed_stays = []
+    @user_previous_stays = []
     @user_bookings = Booking.where(user_id: current_user.id)
+    @user_bookings.each do |booking|
+      if booking.request_approval == '1' || booking.request_approval == '3'
+        @user_pendings_stays << booking
+      elsif booking.request_approval == '2'
+        @user_confirmed_stays << booking
+      elsif booking.stay_date < Time.now
+        @user_previous_stays << booking
+      end
+    end
     erb(:stays_management)
   end
 end
