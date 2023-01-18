@@ -53,4 +53,8 @@ class ApplicationController < Sinatra::Base
       erb(:user_created)
     end
   end
+
+  get '/myaccount' do
+    erb(:user_account)
+  end
 end

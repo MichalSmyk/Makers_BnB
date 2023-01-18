@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'rack/test'
 require_relative '../../app/controllers/application_controller'
 require 'json'
-require "sinatra/base"
-require "sinatra/activerecord"
+require 'sinatra/base'
+require 'sinatra/activerecord'
 
 describe ApplicationController do
   include Rack::Test::Methods
@@ -64,9 +64,9 @@ describe ApplicationController do
     end
 
     it 'should return home_page_redirect view due to already being logged in' do
-      post("/login", username: "abodian", password: "test" )
+      post('/login', username: 'abodian', password: 'test')
       response = get('/signup')
-      
+
       expect(response.status).to eq(200)
       expect(response.body).to include('You are currently logged in therefore cannot sign up. Redirecting to homepage...')
       expect(response.body).to include('<meta http-equiv="refresh" content="3; url = /" />')
@@ -74,38 +74,61 @@ describe ApplicationController do
   end
 
   context 'POST /signup' do
-    describe "password and repeat password are the same" do
+    describe 'password and repeat password are the same' do
       it 'account is created and account_created view is returned' do
-        response =  post('/signup', username: "Spiderman", password: "Web", repeat_password: "Web", first_name: "Peter", last_name: "Parker", email: "webslinger@dailyplanet.net", mobile_number: "696969")
+        response = post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web',
+                                   first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
 
         expect(response.status).to eq(200)
         expect(response.body).to include('Welcome to MakersBnB, Peter')
-        user = User.find_by(username: "Spiderman")
+        user = User.find_by(username: 'Spiderman')
         user.destroy
       end
     end
-    
-    describe "password and repeat password are not the same" do
+
+    context 'GET to /myaccount' do
+      it 'directs to the correct account page with correct details' do
+        post '/login', { username: 'abodian', password: 'test' }
+        response = get('/myaccount')
+        expect(response.status).to eq 200
+        expect(response.body).to include 'Account page for Alex Bodian'
+        expect(response.body).to include 'abodian'
+        expect(response.body).to include 'abodian@email.com'
+        expect(response.body).to include '+44714241945'
+      end
+      it 'includes links to home, stays management and rentals management' do
+        post '/login', { username: 'abodian', password: 'test' }
+        response = get('/myaccount')
+        expect(response.body).to include "<a href= '/'>"
+        expect(response.body).to include "<a href= '/stays-management'>"
+        expect(response.body).to include "<a href= '/rentals-management'>"
+      end
+    end
+
+    describe 'password and repeat password are not the same' do
       it 'account not created and sign_up_password_fail view is returned' do
-        response =  post('/signup', username: "Spiderman", password: "Web", repeat_password: "Aunt", first_name: "Peter", last_name: "Parker", email: "webslinger@dailyplanet.net", mobile_number: "696969")
+        response = post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Aunt',
+                                   first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
 
         expect(response.status).to eq(200)
         expect(response.body).to include('Your passwords must match, please try again...')
       end
     end
-    
-    describe "there is a blank field in the form" do
+
+    describe 'there is a blank field in the form' do
       it 'account not created and sign_up_blank view is returned' do
-        response =  post('/signup', username: "", password: "Web", repeat_password: "Aunt", first_name: "Peter", last_name: "Parker", email: "webslinger@dailyplanet.net", mobile_number: "696969")
+        response = post('/signup', username: '', password: 'Web', repeat_password: 'Aunt', first_name: 'Peter',
+                                   last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
 
         expect(response.status).to eq(200)
         expect(response.body).to include('You cannot leave any of the fields blank, please try again...')
       end
     end
 
-    describe "the username the new user is trying to use is already taken" do
+    describe 'the username the new user is trying to use is already taken' do
       it 'account not created and username_taken view is returned' do
-        response =  post('/signup', username: "abodian", password: "Web", repeat_password: "Web", first_name: "Peter", last_name: "Parker", email: "webslinger@dailyplanet.net", mobile_number: "696969")
+        response = post('/signup', username: 'abodian', password: 'Web', repeat_password: 'Web', first_name: 'Peter',
+                                   last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
 
         expect(response.status).to eq(200)
         expect(response.body).to include('Sorry, that username is taken...')
