@@ -112,4 +112,10 @@ describe ApplicationController do
       end
     end
   end
+
+  context "get /stays-management" do
+    it "lists all pending stay requests for the user" do
+
+    end
+  end
 end
