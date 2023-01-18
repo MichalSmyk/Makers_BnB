@@ -1,8 +1,11 @@
-ENV['RACK_ENV'] = 'test'
+ENV['RACK_ENV'] = "test"
+
 require 'simplecov'
 require 'simplecov-console'
 require 'rack/test'
 require 'sinatra/activerecord'
+
+ENV['RACK_ENV'] = "test"
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
                                                                  SimpleCov::Formatter::Console
