@@ -146,4 +146,15 @@ describe ApplicationController do
       expect(response.body).to include('<h1>Sign Up - Create a new MakersBnB Account</h1>')
     end
   end
+
+  context 'get /stays-management' do
+    it 'lists all pending stay requests for the user' do
+      post('/login', username: 'abodian', password: 'test')
+      response = get('/stays-management')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>Your Pending Stay Requests:</h1>')
+      expect(response.body).to include('<h2>Space Name: Lovely Cottage</h2>')
+    end
+  end
 end
