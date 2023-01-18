@@ -1,0 +1,17 @@
+<h1>Book a Space</h1>
+<h2><%= @space.name %></h2>
+
+<form action="/space/book/<%= @space.id %>" method="post">
+  <label for="date">Choose a date:</label>
+  <select id="date" name="stay_date">
+    <% @dates.each do |date| %>
+      <% formatted_date = date.strftime("%d-%m-%Y") %>
+      <option value="<%= date %>"><%= formatted_date %></option>
+    <% end %>
+  </select>
+  <br>
+  <input type="hidden" name="request_time" value="<%= Time.now %>">
+  <input type="hidden" name="space_id" value="<%= @space.id %>">
+  <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+  <input type="submit" value="Book">
+</form>
