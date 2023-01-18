@@ -1,0 +1,18 @@
+<html>
+
+  <body>
+  <a href= '/'>Home</a><br>
+
+    <h3>Account page for <%= current_user.first_name %> <%= current_user.last_name %></h3>
+    <div>
+    <p>User details:</p><br>
+    <p>Username: <%= current_user.username %> </p><br>
+    <p>Email: <%= current_user.email %> </p><br>
+    <p>Phone Number: <%= current_user.mobile_number %> </p><br><br>
+
+    <a href= '/stays-management'>Stays management</a>
+    <a href= '/rentals-management'>Rentals management</a>
+
+  </body>
+
+</html>
