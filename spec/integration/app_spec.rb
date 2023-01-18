@@ -118,13 +118,13 @@ describe ApplicationController do
       response = get('/space/1') 
 
       expect(response.status).to eq(200)
-      
       expect(response.body).to include('Description')
     end
   end
 
   context 'POST /space ' do 
     it 'sends request to book specific space  if user is logged in' do 
+      post("/login", username: "abodian", password: "test" )
       response = post('/space/1', stay_date: "20-02-2023", request_time: "19-01-2023", request_approval: "1",
         space_id: "1", user_id: "1")
 
@@ -132,7 +132,6 @@ describe ApplicationController do
       expect(response.body).to include("<title>Booking confirmation</title>")
 
       booking = Booking.find_by(user_id: "1")
-      booking.destroy
     end
 
     it 'returns to sign up page if person requesting booking is not logged in' do 
