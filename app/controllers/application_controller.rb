@@ -91,7 +91,7 @@ class ApplicationController < Sinatra::Base
       @user_rentals = Space.where(user_id: current_user.id)
       erb(:rentals_management)
     else
-     redirect '/'
+     erb(:not_logged_in)
     end
   end
 
