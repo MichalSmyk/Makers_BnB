@@ -178,4 +178,22 @@ describe ApplicationController do
       expect(response.body).to include('<h2>Space Name: Lovely Cottage</h2>')
     end
   end
+
+  context 'GET /rentals-management' do
+    it 'returns list of users owned spaces IF logged in' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/rentals-management')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Your rentals:')
+      expect(response.body).to include('Lovely Cottage')
+    end
+
+    it 'redirects to homepage IF NOT logged in' do
+      get('/rentals-management')
+      expect(last_response.status).to eq(302)
+      expect(last_response.location).to eq 'http://example.org/'
+    end
+  end
+
+
 end

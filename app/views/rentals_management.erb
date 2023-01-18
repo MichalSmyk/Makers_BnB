@@ -1,0 +1,11 @@
+<html>
+  <body>
+  <title>Welcome to your Rentals Management Page</title>
+  <h1>Your rentals:</h1>
+
+  <% @user_rentals.each do |rental| %>
+      <h2>Space Name: <%= rental.name %> - <%= rental.description %> </h2>
+      <% end %>
+      <br>
+  </body>
+</html>
