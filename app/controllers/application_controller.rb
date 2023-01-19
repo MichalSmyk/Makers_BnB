@@ -76,4 +76,16 @@ class ApplicationController < Sinatra::Base
     @user_bookings = Booking.where(user_id: current_user.id)
     erb(:stays_management)
   end
+
+
+  get '/rentals-management' do
+    if logged_in?
+      @user_rentals = Space.where(user_id: current_user.id)
+      erb(:rentals_management)
+    else
+     erb(:not_logged_in)
+    end
+  end
+
+
 end
