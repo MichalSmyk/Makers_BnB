@@ -114,14 +114,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/bookings/:id/update' do
-    booking = Booking.find(params[:id])
-    if booking.space.user_id == current_user.id
-      booking.update(request_approval: params[:request_approval])
-      redirect '/rentals-management'
+    @booking = Booking.find(params[:id])
+    if logged_in?
+      booking_status_update
     else
-      erb(:unauthorized)
+      erb(:unauthorised)
     end
   end
-  
-  
 end

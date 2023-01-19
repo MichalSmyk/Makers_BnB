@@ -274,4 +274,25 @@ describe ApplicationController do
       expect(last_response.body).to include('<meta http-equiv="refresh" content="3; url = /" />')
     end
   end
+
+  context 'POST /bookings/:id/update' do
+    describe "user is logged in" do
+      it "updates the booking status from pending to approved (1 to 2) in the database" do
+        post('/login', username: 'abodian', password: 'test')
+        response = post('bookings/1/update', request_approval: 2)
+        expect(response.status).to eq(302)
+        booking = Booking.find("1")
+        expect(booking.request_approval).to eq "2"
+        post('bookings/1/update', request_approval: 1)
+      end
+    end
+    
+    describe "user is not logged in" do
+      it "updates the booking status from pending to approved (1 to 2) in the database" do
+        response = post('bookings/1/update', request_approval: 2)
+        expect(response.status).to eq(200)
+        expect(response.body).to include("<p>You are not authorised to perform this action. Redirecting to homepage</p>")
+      end
+    end
+  end
 end
