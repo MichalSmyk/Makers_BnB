@@ -91,7 +91,6 @@ class ApplicationController < Sinatra::Base
     erb(:booking_confirmation)
   end
 
-
   get '/stays-management' do
     stays_approval_status
     erb(:stays_management)
@@ -108,7 +107,16 @@ class ApplicationController < Sinatra::Base
       @user_rentals = Space.where(user_id: current_user.id)
       erb(:rentals_management)
     else
-     erb(:not_logged_in)
+      erb(:not_logged_in)
     end
+  end
+
+  get '/rentals/add' do
+    erb(:rentals_add)
+  end
+
+  post '/rentals/add' do
+    create_new_rental
+    erb(:rental_created)
   end
 end

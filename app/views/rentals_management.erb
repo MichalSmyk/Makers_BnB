@@ -6,9 +6,9 @@
  </div>
   <title>Welcome to your Rentals Management Page</title>
   <h1>Your rentals:</h1>
-
+  <a href='/rentals/add'> Add new rental </a>
   <% @user_rentals.each do |rental| %>
-      <h2>Space Name: <%= rental.name %> - <%= rental.description %> </h2>
+      <h2>Space Name: <%= rental.name %> - <%= rental.description %> </h2> <a href='/rentals/delete/<%=rental.id%>'> Delete </a>
       <% end %>
       <br>
   </body>
