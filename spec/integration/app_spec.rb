@@ -149,18 +149,35 @@ describe ApplicationController do
       expect(response.body).to include '+44714241945'
       expect(response.body).to include('<input name="password" type="password" placeholder="Password" />')
       expect(response.body).to include('<input type="submit" value="Update Details" />')
+      expect(response.body).to include('<p><input name="username" value="abodian" /></p>')
+      expect(response.body).to include('<p><input name="first_name" value="Alex" /></p>')
     end
   end
 
   context 'POST to myaccount-update' do
-    it 'updates the details of an existing user' do
-      post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
-      response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'WebX', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
-      expect(response.status).to eq(200)
-      expect(response.body).to include('Your details have been updated')
-      user = User.find_by(username: 'testchange')
-      user.destroy
-     end
+    describe "password and repeat password match" do
+      it 'updates the details of an existing user' do
+        post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
+        response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'WebX', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
+        
+        expect(response.status).to eq(200)
+        expect(response.body).to include('Your details have been updated')
+        user = User.find_by(username: 'testchange')
+        user.destroy
+      end
+    end
+
+    describe "password and repeat password do not match" do
+      it 'it lets user know their passwords do not match and redirects back to update details page' do
+        post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
+        response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'Web', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
+        
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<p><span style="color:red">Your passwords do not match, please try again.</span></p>')
+        user = User.find_by(username: 'Spiderman')
+        user.destroy
+      end
+    end
   end
 
 

@@ -62,8 +62,12 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/myaccount-update' do
-    update_user_details
-    erb(:user_account_update_redirect)
+    if !password_and_repeat_password_match
+      erb(:user_account_update_password_fail)
+    else
+      update_user_details
+      erb(:user_account_update_redirect)
+    end
   end
 
   get '/space/:id' do
