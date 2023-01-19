@@ -67,6 +67,4 @@ module SessionHelper
     @user_declined_stays = Booking.where(user_id: current_user.id, request_approval: 3)
     @user_previous_stays = Booking.where(user_id: current_user.id, stay_date: Time.now.midnight-1.day..Time.now.midnight)
   end
-
-
 end

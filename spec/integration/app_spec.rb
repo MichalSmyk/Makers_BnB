@@ -174,4 +174,20 @@ describe ApplicationController do
       expect(Booking.all.length).to eq 23
     end
   end
+
+  context 'GET /rentals-management' do
+    it 'returns list of users owned spaces IF logged in' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/rentals-management')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Your rentals:')
+      expect(response.body).to include('Lovely Cottage')
+    end
+
+    it 'redirects to homepage IF NOT logged in' do
+      get('/rentals-management')
+      expect(last_response.status).to eq(200)
+      expect(last_response.body).to include('<meta http-equiv="refresh" content="3; url = /" />')
+    end
+  end
 end

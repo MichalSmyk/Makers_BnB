@@ -72,6 +72,12 @@ class ApplicationController < Sinatra::Base
     erb(:booking_confirmation)
   end
 
+  post '/space/book/:id' do
+    create_new_booking
+    erb(:booking_confirmation)
+  end
+
+
   get '/stays-management' do
     stays_approval_status
     erb(:stays_management)
@@ -81,5 +87,14 @@ class ApplicationController < Sinatra::Base
     booking = Booking.find_by(id: params[:id])
     booking.destroy
     erb(:delete_confirmed_redirect_stays_management)
+  end
+
+  get '/rentals-management' do
+    if logged_in?
+      @user_rentals = Space.where(user_id: current_user.id)
+      erb(:rentals_management)
+    else
+     erb(:not_logged_in)
+    end
   end
 end
