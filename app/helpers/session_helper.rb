@@ -48,20 +48,16 @@ module SessionHelper
 
   def load_space
     @space = Space.find_by(id: params[:id])
-    @dates = SpaceDate.find_by(id: params[:id])
-    @user = @space.user
-    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time],
-                              request_approval: params[:request_approval], space_id: params[:space_id], user_id: params[:user_id])
+    @dates = SpaceDate.where(space_id: params[:id]).order('date_available ASC')
   end
 
-  # def approvals 
-  #   Booking.find_by(request_approval: params[:request_approval])
-  #   if request_approval == 1 
-  #     return "Pending"
-  #   elsif request_approval == 2 
-  #     return "Accepted"
-  #   else
-  #     return "Declined"
-  #   end
-  # end 
+  def book_space_date_choice
+    @space = Space.find(params[:id])
+    @dates = SpaceDate.where(space_id: params[:id]).select(:date_available).distinct.pluck(:date_available)
+  end
+
+  def create_new_booking
+    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time], 
+      space_id: params[:space_id], user_id: params[:user_id], request_approval: '1')
+  end
 end

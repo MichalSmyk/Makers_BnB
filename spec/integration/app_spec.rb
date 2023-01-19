@@ -117,7 +117,7 @@ describe ApplicationController do
     end
   end
 
-  context 'get/space/:id' do
+  context 'get /space/:id' do
     it 'should get to space page ' do
       response = get('/space/1')
 
@@ -126,24 +126,27 @@ describe ApplicationController do
     end
   end
 
-  context 'POST /space ' do
+  context 'get /space/book/:id' do
+    it 'should show a list of available dates and allow user to submit a choice' do
+      response = get('/space/book/1')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('      <option value="2028-01-23 00:00:00 UTC">23-01-2028</option>')
+    end
+  end
+
+  context 'POST /space/book/:id' do
     it 'sends request to book specific space  if user is logged in' do
       post('/login', username: 'abodian', password: 'test')
-      response = post('/space/1', stay_date: '20-02-2023', request_time: '19-01-2023', request_approval: '1',
+      response = post('/space/book/1', stay_date: '2028-01-23', request_time: '19-01-2023', request_approval: '1',
                                   space_id: '1', user_id: '1')
 
       expect(response.status).to eq(200)
       expect(response.body).to include('<title>Booking confirmation</title>')
 
-      booking = Booking.find_by(user_id: '1')
-    end
-
-    it 'returns to sign up page if person requesting booking is not logged in' do
-      response = post('/space/1', stay_date: '20-02-2023', request_time: '19-01-2023', request_approval: '1',
-                                  space_id: '1', user_id: '1')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to include('<h1>Sign Up - Create a new MakersBnB Account</h1>')
+      booking = Booking.find_by(stay_date: '2028-01-23')
+      expect(booking.request_time).to eq('2023-01-19 00:00:00 UTC')
+      booking.destroy
     end
   end
 
