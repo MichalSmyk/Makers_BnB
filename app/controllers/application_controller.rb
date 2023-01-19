@@ -73,21 +73,42 @@ class ApplicationController < Sinatra::Base
 
   get '/space/:id' do
     load_space
-    erb :spaces_id
+    erb :space_id
   end
 
-  post '/space/:id' do
-    @space = Space.find_by(id: params[:id])
-    if logged_in?
-      erb(:booking_confirmation)
-    else
-      erb(:signup)
-    end
+  get '/space/book/:id' do
+    book_space_date_choice
+    erb(:book)
   end
+
+  post '/space/book/:id' do
+    create_new_booking
+    erb(:booking_confirmation)
+  end
+
+  post '/space/book/:id' do
+    create_new_booking
+    erb(:booking_confirmation)
+  end
+
 
   get '/stays-management' do
-    @user_pending_stays = []
-    @user_bookings = Booking.where(user_id: current_user.id)
+    stays_approval_status
     erb(:stays_management)
+  end
+
+  post '/stays-management/delete/:id' do
+    booking = Booking.find_by(id: params[:id])
+    booking.destroy
+    erb(:delete_confirmed_redirect_stays_management)
+  end
+
+  get '/rentals-management' do
+    if logged_in?
+      @user_rentals = Space.where(user_id: current_user.id)
+      erb(:rentals_management)
+    else
+     erb(:not_logged_in)
+    end
   end
 end

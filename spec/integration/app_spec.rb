@@ -25,6 +25,12 @@ describe ApplicationController do
       response = get('/')
       expect(response.body).to include 'Lovely Cottage'
     end
+    it 'includes a link to your account page after logging in' do
+      post 'login', { username: 'abodian', password: 'test'}
+      response = get('/')
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<div><a href='/myaccount'>My account</a></div>")
+    end
   end
   context 'POST to /login' do
     it 'logs in with valid credentials' do
@@ -196,24 +202,27 @@ describe ApplicationController do
     end
   end
 
-  context 'POST /space ' do
+  context 'get /space/book/:id' do
+    it 'should show a list of available dates and allow user to submit a choice' do
+      response = get('/space/book/1')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('      <option value="2028-01-23 00:00:00 UTC">23-01-2028</option>')
+    end
+  end
+
+  context 'POST /space/book/:id' do
     it 'sends request to book specific space  if user is logged in' do
       post('/login', username: 'abodian', password: 'test')
-      response = post('/space/1', stay_date: '20-02-2023', request_time: '19-01-2023', request_approval: '1',
+      response = post('/space/book/1', stay_date: '2028-01-23', request_time: '19-01-2023', request_approval: '1',
                                   space_id: '1', user_id: '1')
 
       expect(response.status).to eq(200)
       expect(response.body).to include('<title>Booking confirmation</title>')
 
-      booking = Booking.find_by(user_id: '1')
-    end
-
-    it 'returns to sign up page if person requesting booking is not logged in' do
-      response = post('/space/1', stay_date: '20-02-2023', request_time: '19-01-2023', request_approval: '1',
-                                  space_id: '1', user_id: '1')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to include('<h1>Sign Up - Create a new MakersBnB Account</h1>')
+      booking = Booking.find_by(stay_date: '2028-01-23')
+      expect(booking.request_time).to eq('2023-01-19 00:00:00 UTC')
+      booking.destroy
     end
   end
 
@@ -228,4 +237,33 @@ describe ApplicationController do
     end
   end
 
+  context 'POST /stays-management' do 
+    it 'deletes a booking request if pending or approved' do 
+      post('/login', username: 'abodian', password: 'test')
+      post('/space/book/1', stay_date: '2028-01-23', request_time: '19-01-2023', request_approval: '1', space_id: '1', user_id: '1')
+      booking = Booking.find_by(stay_date: '2028-01-23')
+      response = post("/stays-management/delete/#{booking.id}")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<p>Your booking has been deleted...taking you back to your Stays Management page</p>')
+      expect(response.body).to include('<meta http-equiv="refresh" content="3; url = /stays-management" />')
+      expect(Booking.all.length).to eq 23
+    end
+  end
+
+  context 'GET /rentals-management' do
+    it 'returns list of users owned spaces IF logged in' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/rentals-management')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Your rentals:')
+      expect(response.body).to include('Lovely Cottage')
+    end
+
+    it 'redirects to homepage IF NOT logged in' do
+      get('/rentals-management')
+      expect(last_response.status).to eq(200)
+      expect(last_response.body).to include('<meta http-equiv="refresh" content="3; url = /" />')
+    end
+  end
 end
