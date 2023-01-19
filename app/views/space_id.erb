@@ -4,8 +4,12 @@
  </head>
  <body>
     <div class="topnav">
+    <% if logged_in? %>
   <a href="/">Home</a>
   <a href="/myaccount">My account</a>
+  <%else%>
+  <a href="/">Home</a>
+  <%end%>
  </div>
    <h1> <%= @space.name %> </h1>
    <p>
