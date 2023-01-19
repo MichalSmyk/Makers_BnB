@@ -4,6 +4,7 @@ require_relative '../../app/controllers/application_controller'
 require 'json'
 require 'sinatra/base'
 require 'sinatra/activerecord'
+require 'bcrypt'
 
 describe ApplicationController do
   include Rack::Test::Methods
@@ -127,7 +128,76 @@ describe ApplicationController do
     end
   end
 
-  context 'get /space/:id' do
+  context 'GET to /myaccount' do
+    it 'directs to the correct account page with correct details' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/myaccount')
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Account page for Alex Bodian'
+      expect(response.body).to include 'abodian'
+      expect(response.body).to include 'abodian@email.com'
+      expect(response.body).to include '+44714241945'
+    end
+
+    it 'includes links to home, stays management and rentals management ' do 
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/myaccount')
+      expect(response.body).to include "<a href= '/'>"
+      expect(response.body).to include "<a href= '/stays-management'>"
+      expect(response.body).to include "<a href= '/rentals-management'>"
+      expect(response.body).to include "<a href= '/myaccount-update'>"
+    end
+  end
+
+  context 'GET to myaccount-update' do
+    it 'returns account page with correct details and an update form' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/myaccount-update')
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Account page for Alex Bodian'
+      expect(response.body).to include 'abodian'
+      expect(response.body).to include 'abodian@email.com'
+      expect(response.body).to include '+44714241945'
+      expect(response.body).to include('<input name="password" type="password" placeholder="Password" />')
+      expect(response.body).to include('<input type="submit" value="Update Details" />')
+      expect(response.body).to include('<p><input name="username" value="abodian" /></p>')
+      expect(response.body).to include('<p><input name="first_name" value="Alex" /></p>')
+    end
+  end
+
+  context 'POST to myaccount-update' do
+    describe "password and repeat password match" do
+      it 'updates the details of an existing user' do
+        post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
+        response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'WebX', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
+        
+        expect(response.status).to eq(200)
+        expect(response.body).to include('Your details have been updated')
+        user = User.find_by(username: 'testchange')
+        expect(user.username).to eq 'testchange'
+        expect(user.first_name).to eq 'PeterX'
+        expect(user.last_name).to eq 'ParkerX'
+        expect(user.email).to eq 'webslinger@dailyplanet.netX'
+        expect(user.mobile_number).to eq '696969X'
+        user.destroy
+      end
+    end
+
+    describe "password and repeat password do not match" do
+      it 'it lets user know their passwords do not match and redirects back to update details page' do
+        post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
+        response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'Web', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
+        
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<p><span style="color:red">Your passwords do not match, please try again.</span></p>')
+        user = User.find_by(username: 'Spiderman')
+        user.destroy
+      end
+    end
+  end
+
+
+  context 'get/space/:id' do
     it 'should get to space page ' do
       response = get('/space/1')
 
