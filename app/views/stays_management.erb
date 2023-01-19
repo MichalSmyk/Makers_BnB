@@ -2,20 +2,49 @@
   <body>
   <title>Welcome to your Stays Management Page</title>
   <h1>Your Pending Stay Requests:</h1>
-
-  <% @user_bookings.each do |booking| %>
-      <h2>Space Name: <%= booking.space.name %></h2>
-      <strong>Stay Date:</strong> <%= booking.stay_date.strftime("%d/%h/%Y") %><br>
-      <strong>Stay Requested Date:</strong> <%= booking.request_time.strftime("%d/%m/%Y") %><br>
-      <% if booking.request_approval == "1" %>
-      <strong>Stay Approval Status:</strong> Pending<br>
-      <% elsif booking.request_approval == "2" %>
-      <strong>Stay Approval Status:</strong> Approved <br>
-      <% else booking.request_approval == "3" %>  
-      <strong>Stay Approval Status:</strong> Declined <br>
+  <% if @user_pending_stays.empty? %>
+      <p>You currently have no pending stay requests.</p>
+  <% else %>
+      <% @user_pending_stays.each do |booking| %>
+          <h2>Space Name: <%= booking.space.name %></h2>
+          <strong>Stay Date:</strong> <%= booking.stay_date.strftime("%d/%h/%Y") %><br>
+          <strong>Stay Requested Date:</strong> <%= booking.request_time.strftime("%d/%m/%Y") %><br>
+          <form method="POST" action="/stays-management/delete/<%=booking.id%>">
+          <input type="submit" value="Delete Booking Request" />
       <% end %>
-      <br>
-      <input type="submit" value="Delete Booking Request" />
   <% end %>
-  </body>
-</html>
+  
+  <h1>Your Approved Stay Requests:</h1>
+  <% if @user_approved_stays.empty? %>
+      <p>You currently have no approved stay requests.</p>
+  <% else %>
+      <% @user_approved_stays.each do |booking| %>
+          <h2>Space Name: <%= booking.space.name %></h2>
+          <strong>Stay Date:</strong> <%= booking.stay_date.strftime("%d/%h/%Y") %><br>
+          <strong>Stay Requested Date:</strong> <%= booking.request_time.strftime("%d/%m/%Y") %><br>
+          <form method="POST" action="/stays-management/delete/<%=booking.id%>">
+          <input type="submit" value="Delete Booking Request" />
+      <% end %>
+  <% end %>
+  
+  <h1>Your Declined Stay Requests:</h1>
+  <% if @user_declined_stays.empty? %>
+      <p>You currently have no declined stay requests.</p>
+  <% else %>
+      <% @user_declined_stays.each do |booking| %>
+          <h2>Space Name: <%= booking.space.name %></h2>
+          <strong>Stay Date:</strong> <%= booking.stay_date.strftime("%d/%h/%Y") %><br>
+          <strong>Stay Requested Date:</strong> <%= booking.request_time.strftime("%d/%m/%Y") %><br>
+      <% end %>
+  <% end %>
+  
+  <h1>Your Previous Stay Requests:</h1>
+  <% if @user_previous_stays.empty? %>
+      <p>You currently have no previous stay requests.</p>
+  <% else %>
+      <% @user_previous_stays.each do |booking| %>
+         <h2>Space Name: <%= booking.space.name %></h2>
+          <strong>Stay Date:</strong> <%= booking.stay_date.strftime("%d/%h/%Y") %><br>
+          <strong>Stay Requested Date:</strong> <%= booking.request_time.strftime("%d/%m/%Y") %><br>
+      <% end %>
+  <% end %>

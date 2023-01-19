@@ -161,6 +161,20 @@ describe ApplicationController do
     end
   end
 
+  context 'POST /stays-management' do 
+    it 'deletes a booking request if pending or approved' do 
+      post('/login', username: 'abodian', password: 'test')
+      post('/space/book/1', stay_date: '2028-01-23', request_time: '19-01-2023', request_approval: '1', space_id: '1', user_id: '1')
+      booking = Booking.find_by(stay_date: '2028-01-23')
+      response = post("/stays-management/delete/#{booking.id}")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<p>Your booking has been deleted...taking you back to your Stays Management page</p>')
+      expect(response.body).to include('<meta http-equiv="refresh" content="3; url = /stays-management" />')
+      expect(Booking.all.length).to eq 23
+    end
+  end
+
   context 'GET /rentals-management' do
     it 'returns list of users owned spaces IF logged in' do
       post '/login', { username: 'abodian', password: 'test' }
@@ -176,6 +190,4 @@ describe ApplicationController do
       expect(last_response.body).to include('<meta http-equiv="refresh" content="3; url = /" />')
     end
   end
-
-
 end
