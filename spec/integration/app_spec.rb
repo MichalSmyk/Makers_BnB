@@ -134,8 +134,40 @@ describe ApplicationController do
       expect(response.body).to include "<a href= '/'>"
       expect(response.body).to include "<a href= '/stays-management'>"
       expect(response.body).to include "<a href= '/rentals-management'>"
-      expect(response.body).to include "<a href= '/myaccount-update'>" #updated details link
+      expect(response.body).to include "<a href= '/myaccount-update'>"
     end
+  end
+
+  context 'GET to myaccount-update' do
+    it 'returns account page with correct details and an update form' do
+      post '/login', { username: 'abodian', password: 'test' }
+      response = get('/myaccount-update')
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Account page for Alex Bodian'
+      expect(response.body).to include 'abodian'
+      expect(response.body).to include 'abodian@email.com'
+      expect(response.body).to include '+44714241945'
+      expect(response.body).to include('<input name="password" type="password" placeholder="Password" />')
+      expect(response.body).to include('<input type="submit" value="Update Details" />')
+    end
+  end
+
+  context 'POST to myaccount-update' do
+    it 'updates the details of an existing user' do
+       post '/login', { username: 'abodian', password: 'test' }
+  #     # post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web',
+  #     #   first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
+  #     #   post '/login', { username: 'Spiderman', password: 'Web' }
+       response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'WebX', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
+       expect(response.status).to eq(200)
+       expect(response.body).to include('Your details have been updated')
+          # response = post('/myaccount-update', username: 'SpidermanX', password: 'WebX', repeat_password: 'WebX',
+          #   first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
+          # expect(response.status).to eq(200)
+          # expect(response.body).to include('Your details have been updated')
+          # user = User.find_by(username: 'SpidermanX')
+          # user.destroy
+     end
   end
 
 
@@ -179,4 +211,5 @@ describe ApplicationController do
       expect(response.body).to include('<h2>Space Name: Lovely Cottage</h2>')
     end
   end
+
 end

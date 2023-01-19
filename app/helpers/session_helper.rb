@@ -41,6 +41,12 @@ module SessionHelper
     session[:user_id] = @user.id
   end
 
+  # def update_user_details
+  #   @user = User.update(username: params[:username], email: params[:email],
+  #     password_digest: params[:password], first_name: params[:first_name], last_name: params[:last_name])
+  #     session[:user_id] = @user.id
+  #   end
+
   def load_homepage
     @spaces = Space.all
     erb(:index)

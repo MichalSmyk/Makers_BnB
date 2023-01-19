@@ -57,6 +57,14 @@ class ApplicationController < Sinatra::Base
     erb(:user_account)
   end
 
+  get '/myaccount-update' do
+    erb(:user_account_update)
+  end
+
+  post '/myaccount-update' do
+    erb(:user_account_update_redirect)
+  end
+
   get '/space/:id' do
     load_space
     erb :spaces_id
