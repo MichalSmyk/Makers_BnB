@@ -1,4 +1,4 @@
-<head> <link rel="stylesheet" href="/style.css" /> </head>
+<head> <link rel="stylesheet" href="/style2.css" /> </head>
  
   <div class="topnav">
 
@@ -12,7 +12,9 @@
        The host for this space is: <%= @space.user.username %>  <!-- add link for account page -->
     </p> 
   <p>
-    <strong> Availability: </strong> <%@dates.each do |date| formatted_date = date.date_available.strftime("%d-%m-%Y") %>
+    <strong> Availability: </strong></p>
+     <%@dates.each do |date| 
+       formatted_date = date.date_available.strftime("%d-%m-%Y") %>
         <%= formatted_date %><br>
       <%end%></p>
 
@@ -20,17 +22,15 @@
       <strong>Price:</strong> <%= "£#{'%.2f' % @space.price}" %>
   </p> 
 
-  <div>
   
-  <% if  logged_in? %>
+  <% if  logged_in? %> 
     <form action="/space/book/<%=@space.id%>">
     <input type="submit" value="Go to booking page" />
 </form>
   <% else %>
-  <a href='/signup'>Sign up to request this space if you do not have an account</a><br>
-  or<br>
-  <a href='/'>Log in to request this space</a>
+   <a href='/signup'>Sign up to request this space if you do not have an account</a><br>
+   or<br>
+   <a href='/'>Log in to request this space</a>
   <% end %>
 </form>
-  </div>
  </body>

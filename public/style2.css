@@ -22,8 +22,15 @@ body {
     font-size: 60px;
     font-style: oblique;
     text-shadow: white;
-    outline: 2px solid;
+    outline: 4px solid;
     outline-color: orangered;
   }
   
- 
+a {
+ background-color: orangered;
+ color: black;
+ padding: 14px 25px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block; 
+}
