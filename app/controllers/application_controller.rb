@@ -106,10 +106,22 @@ class ApplicationController < Sinatra::Base
   get '/rentals-management' do
     if logged_in?
       @user_rentals = Space.where(user_id: current_user.id)
-      owner_pending_approval
+      # owner_pending_approval
       erb(:rentals_management)
     else
      erb(:not_logged_in)
     end
   end
+
+  post '/bookings/:id/update' do
+    booking = Booking.find(params[:id])
+    if booking.space.user_id == current_user.id
+      booking.update(request_approval: params[:request_approval])
+      redirect '/rentals-management'
+    else
+      erb(:unauthorized)
+    end
+  end
+  
+  
 end
