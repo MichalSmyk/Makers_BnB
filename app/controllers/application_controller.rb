@@ -62,6 +62,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/myaccount-update' do
+    update_user_details
     erb(:user_account_update_redirect)
   end
 
