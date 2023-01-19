@@ -42,10 +42,9 @@ module SessionHelper
   end
 
   def update_user_details
-    @user = User.update(username: params[:username], email: params[:email],
+    @user = current_user.update(username: params[:username], email: params[:email],
       password: params[:password], first_name: params[:first_name], last_name: params[:last_name])
-      session[:user_id] = @user.id
-    end
+  end
 
   def load_homepage
     @spaces = Space.all

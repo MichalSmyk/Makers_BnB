@@ -154,14 +154,12 @@ describe ApplicationController do
 
   context 'POST to myaccount-update' do
     it 'updates the details of an existing user' do
-      #  post '/login', { username: 'abodian', password: 'test' }
       post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
-      post '/login', { username: 'Spiderman', password: 'Web' }
       response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'WebX', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
       expect(response.status).to eq(200)
       expect(response.body).to include('Your details have been updated')
-          user = User.find_by(username: 'testchange')
-          user.destroy
+      user = User.find_by(username: 'testchange')
+      user.destroy
      end
   end
 
