@@ -1,0 +1,13 @@
+p {
+    text-align: center;
+    padding: 40px;
+    margin: 200px;
+    vertical-align: middle;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 60px;
+    font-style: oblique;
+    text-shadow: black;
+    outline: 4px solid;
+    outline-color: orangered;
+  }
