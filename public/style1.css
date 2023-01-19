@@ -1,0 +1,26 @@
+
+.names {
+    text-align: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 20px;
+    font-style: oblique;
+    text-shadow: #999;
+    background-color: orangered;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-decoration: none;
+    box-shadow: 0 2px #999;
+    cursor: pointer;
+}
+
+h1 {
+    text-align: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 48px;
+    font-style: oblique;
+    text-shadow: #999;
+    background-color: orangered;
+}
