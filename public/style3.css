@@ -7,7 +7,7 @@ p {
     font-family: monospace;
     font-size: 60px;
     font-style: oblique;
-    text-shadow: black;
+    text-shadow: white;
     outline: 4px solid;
     outline-color: orangered;
   }
