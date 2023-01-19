@@ -1,0 +1,29 @@
+.topnav {
+    float: left;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;    
+    }
+
+
+body {
+    text-align: center;
+    font-family: monospace;
+    font-size: 25px;
+    background-color: white;
+  }
+  
+  h1 {
+    text-align: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 60px;
+    font-style: oblique;
+    text-shadow: white;
+    outline: 2px solid;
+    outline-color: orangered;
+  }
+  
+ 

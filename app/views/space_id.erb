@@ -1,7 +1,10 @@
-<html>
-  <head>
-    <title>MakersBnB-Space</title>
- </head>
+<head> <link rel="stylesheet" href="/style.css" /> </head>
+ 
+  <div class="topnav">
+
+   <a class="active" href="/">Home</a>
+</div>
+
  <body>
    <h1> <%= @space.name %> </h1>
    <p>
@@ -9,9 +12,7 @@
        The host for this space is: <%= @space.user.username %>  <!-- add link for account page -->
     </p> 
   <p>
-      <p><strong> Availability: </strong></p>
-      <%@dates.each do |date|
-        formatted_date = date.date_available.strftime("%d-%m-%Y") %>
+    <strong> Availability: </strong> <%@dates.each do |date| formatted_date = date.date_available.strftime("%d-%m-%Y") %>
         <%= formatted_date %><br>
       <%end%></p>
 
@@ -33,4 +34,3 @@
 </form>
   </div>
  </body>
-</html>
