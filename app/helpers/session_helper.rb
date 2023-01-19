@@ -43,7 +43,9 @@ module SessionHelper
 
   def update_user_details
     @user = current_user.update(username: params[:username], email: params[:email],
-      password: params[:password], first_name: params[:first_name], last_name: params[:last_name])
+      password: params[:password], first_name: params[:first_name], last_name: params[:last_name], mobile_number: params[:mobile_number])
+
+    current_user.password = params[:password]
   end
 
   def load_homepage

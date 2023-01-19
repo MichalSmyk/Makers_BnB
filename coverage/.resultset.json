@@ -9,6 +9,7 @@
           1,
           1,
           1,
+          1,
           null,
           1,
           1,
@@ -169,6 +170,11 @@
           1,
           1,
           1,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
           null,
@@ -232,6 +238,7 @@
       },
       "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
         "lines": [
+          1,
           1,
           1,
           1,
@@ -350,7 +357,7 @@
           null,
           null,
           1,
-          37,
+          38,
           null,
           null,
           1,
@@ -390,6 +397,8 @@
           1,
           1,
           null,
+          null,
+          1,
           null,
           null,
           1,
@@ -453,6 +462,6 @@
         ]
       }
     },
-    "timestamp": 1674143789
+    "timestamp": 1674145031
   }
 }

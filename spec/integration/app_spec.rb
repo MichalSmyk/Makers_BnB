@@ -4,6 +4,7 @@ require_relative '../../app/controllers/application_controller'
 require 'json'
 require 'sinatra/base'
 require 'sinatra/activerecord'
+require 'bcrypt'
 
 describe ApplicationController do
   include Rack::Test::Methods
@@ -163,6 +164,11 @@ describe ApplicationController do
         expect(response.status).to eq(200)
         expect(response.body).to include('Your details have been updated')
         user = User.find_by(username: 'testchange')
+        expect(user.username).to eq 'testchange'
+        expect(user.first_name).to eq 'PeterX'
+        expect(user.last_name).to eq 'ParkerX'
+        expect(user.email).to eq 'webslinger@dailyplanet.netX'
+        expect(user.mobile_number).to eq '696969X'
         user.destroy
       end
     end
