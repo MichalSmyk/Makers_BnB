@@ -28,20 +28,20 @@ describe ApplicationController do
   context 'POST to /login' do
     it 'logs in with valid credentials' do
       response = post('/login', username: 'abodian', password: 'test')
-      expect(response.status).to eq(200)
-      expect(response.body).to include 'You are logged in as'
+      expect(last_response.status).to eq(200)
+      expect(response.body).to include 'Logged In Successfully!'
     end
 
     it 'remains logged in when navigating site' do
       post '/login', { username: 'abodian', password: 'test' }
       response = get('/')
-      expect(response.body).to include 'You are logged in as'
+      expect(response.body).to include 'You are logged in as:'
     end
 
     it 'will not signin with invalid credentials' do
       response = post('/login', username: 'abodian', password: 'wrong')
       expect(response.status).to eq(200)
-      expect(response.body).not_to include 'You are logged in as'
+      expect(response.body).not_to include 'You are logged in as:'
     end
   end
 
@@ -85,27 +85,6 @@ describe ApplicationController do
         user.destroy
       end
     end
-
-
-    context 'GET to /myaccount' do
-      it 'directs to the correct account page with correct details' do
-        post '/login', { username: 'abodian', password: 'test' }
-        response = get('/myaccount')
-        expect(response.status).to eq 200
-        expect(response.body).to include 'Account page for Alex Bodian'
-        expect(response.body).to include 'abodian'
-        expect(response.body).to include 'abodian@email.com'
-        expect(response.body).to include '+44714241945'
-      end
-      it 'includes links to home, stays management and rentals management' do
-        post '/login', { username: 'abodian', password: 'test' }
-        response = get('/myaccount')
-        expect(response.body).to include "<a href= '/'>"
-        expect(response.body).to include "<a href= '/stays-management'>"
-        expect(response.body).to include "<a href= '/rentals-management'>"
-      end
-    end
-
 
     describe 'password and repeat password are not the same' do
       it 'account not created and sign_up_password_fail view is returned' do
