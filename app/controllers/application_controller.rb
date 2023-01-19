@@ -59,7 +59,7 @@ class ApplicationController < Sinatra::Base
 
   get '/space/:id' do
     load_space
-    erb :spaces_id
+    erb :space_id
   end
 
   get '/space/book/:id' do

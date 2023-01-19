@@ -49,7 +49,6 @@ module SessionHelper
   def load_space
     @space = Space.find_by(id: params[:id])
     @dates = SpaceDate.where(space_id: params[:id]).order('date_available ASC')
-    @user = @space.user
   end
 
   def book_space_date_choice
