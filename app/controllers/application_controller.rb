@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require 'sinatra/activerecord'
 require_relative '../../config/environment'
 require_relative '../helpers/session_helper'
+require 'bcrypt'
 
 class ApplicationController < Sinatra::Base
   include SessionHelper
@@ -55,6 +56,19 @@ class ApplicationController < Sinatra::Base
 
   get '/myaccount' do
     erb(:user_account)
+  end
+
+  get '/myaccount-update' do
+    erb(:user_account_update)
+  end
+
+  post '/myaccount-update' do
+    if !password_and_repeat_password_match
+      erb(:user_account_update_password_fail)
+    else
+      update_user_details
+      erb(:user_account_update_redirect)
+    end
   end
 
   get '/space/:id' do
