@@ -65,18 +65,3 @@ body {
     cursor: pointer;
   }
   
-  img {
-    object-position: right;
-    float: right;
-    justify-content: right;
-    margin-top: auto; 
-    right: 0;
-    top: 20px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 18px;
-    height: auto;
-    padding-right: 250px;
-    margin: 25px;
-   }
