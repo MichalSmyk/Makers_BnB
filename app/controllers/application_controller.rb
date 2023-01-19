@@ -59,7 +59,7 @@ class ApplicationController < Sinatra::Base
 
   get '/space/:id' do
     load_space
-    erb :spaces_id
+    erb :space_id
   end
 
   get '/space/book/:id' do
@@ -73,10 +73,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/stays-management' do
-    @user_pending_stays = Booking.where(user_id: current_user.id, request_approval: 1)
-    @user_approved_stays = Booking.where(user_id: current_user.id, request_approval: 2)
-    @user_declined_stays = Booking.where(user_id: current_user.id, request_approval: 3)
-    @user_previous_stays = Booking.where(user_id: current_user.id, stay_date: Time.now.midnight-1.day..Time.now.midnight)
+    stays_approval_status
     erb(:stays_management)
   end
 

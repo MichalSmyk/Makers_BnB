@@ -49,7 +49,6 @@ module SessionHelper
   def load_space
     @space = Space.find_by(id: params[:id])
     @dates = SpaceDate.where(space_id: params[:id]).order('date_available ASC')
-    @user = @space.user
   end
 
   def book_space_date_choice
@@ -61,4 +60,13 @@ module SessionHelper
     @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time], 
       space_id: params[:space_id], user_id: params[:user_id], request_approval: '1')
   end
+
+  def stays_approval_status
+    @user_pending_stays = Booking.where(user_id: current_user.id, request_approval: 1)
+    @user_approved_stays = Booking.where(user_id: current_user.id, request_approval: 2)
+    @user_declined_stays = Booking.where(user_id: current_user.id, request_approval: 3)
+    @user_previous_stays = Booking.where(user_id: current_user.id, stay_date: Time.now.midnight-1.day..Time.now.midnight)
+  end
+
+
 end
