@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/davidscott/Projects/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
+      "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
         "lines": [
           1,
           1,
@@ -204,7 +204,7 @@
           null
         ]
       },
-      "/Users/davidscott/Projects/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
+      "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -307,7 +307,7 @@
           null
         ]
       },
-      "/Users/davidscott/Projects/makersbnb-ruby-seed/config/environment.rb": {
+      "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/config/environment.rb": {
         "lines": [
           1,
           null,
@@ -323,7 +323,7 @@
           1
         ]
       },
-      "/Users/davidscott/Projects/makersbnb-ruby-seed/app/helpers/session_helper.rb": {
+      "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/app/helpers/session_helper.rb": {
         "lines": [
           1,
           1,
@@ -381,7 +381,7 @@
           null
         ]
       },
-      "/Users/davidscott/Projects/makersbnb-ruby-seed/app/models/booking.rb": {
+      "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/app/models/booking.rb": {
         "lines": [
           1,
           1,
@@ -389,21 +389,21 @@
           null
         ]
       },
-      "/Users/davidscott/Projects/makersbnb-ruby-seed/app/models/space.rb": {
+      "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/app/models/space.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/davidscott/Projects/makersbnb-ruby-seed/app/models/space_date.rb": {
+      "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/app/models/space_date.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/davidscott/Projects/makersbnb-ruby-seed/app/models/user.rb": {
+      "/Users/abod/MA/MA-Projects/Engineering-Projects/makersbnb-ruby-seed/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -416,6 +416,6 @@
         ]
       }
     },
-    "timestamp": 1674057109
+    "timestamp": 1674124206
   }
 }
