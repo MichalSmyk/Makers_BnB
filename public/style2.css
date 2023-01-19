@@ -1,0 +1,34 @@
+body {
+    text-align: center;
+    font-family: monospace;
+    font-size: 25px;
+    background-color: white;
+  }
+  
+h1 {
+    text-align: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 60px;
+    font-style: oblique;
+    text-shadow: white;
+    outline: 4px solid;
+    outline-color: orangered;
+  }
+img{
+  width: 500x;
+  height: 400px;
+}
+
+.img{
+  max-width: 100px;
+  max-height: 150px;
+}
+a {
+ background-color: orangered;
+ color: black;
+ padding: 14px 25px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block; 
+}
