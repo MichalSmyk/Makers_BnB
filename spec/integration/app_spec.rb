@@ -59,6 +59,7 @@ describe ApplicationController do
       response = get('/signup')
 
       expect(response.status).to eq(200)
+      expect(response.body).to include('<div class="topnav">')
       expect(response.body).to include('Sign Up - Create a new MakersBnB Account')
       expect(response.body).to include('<input name="password" type="password" placeholder="Password" />')
     end
@@ -92,6 +93,7 @@ describe ApplicationController do
                                    first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
 
         expect(response.status).to eq(200)
+        expect(response.body).to include('<div class="topnav">')
         expect(response.body).to include('Your passwords must match, please try again...')
       end
     end
@@ -102,6 +104,7 @@ describe ApplicationController do
                                    last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
 
         expect(response.status).to eq(200)
+        expect(response.body).to include('<div class="topnav">')
         expect(response.body).to include('You cannot leave any of the fields blank, please try again...')
       end
     end
@@ -112,6 +115,7 @@ describe ApplicationController do
                                    last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
 
         expect(response.status).to eq(200)
+        expect(response.body).to include('  <div class="topnav">')
         expect(response.body).to include('Sorry, that username is taken...')
       end
     end
@@ -122,6 +126,7 @@ describe ApplicationController do
       response = get('/space/1')
 
       expect(response.status).to eq(200)
+      expect(response.body).to include('    <div class="topnav">')
       expect(response.body).to include('Description')
     end
   end
@@ -131,6 +136,7 @@ describe ApplicationController do
       response = get('/space/book/1')
 
       expect(response.status).to eq(200)
+      expect(response.body).to include(' <div class="topnav">')
       expect(response.body).to include('      <option value="2028-01-23 00:00:00 UTC">23-01-2028</option>')
     end
   end
@@ -156,6 +162,7 @@ describe ApplicationController do
       response = get('/stays-management')
 
       expect(response.status).to eq(200)
+      expect(response.body).to include('<div class="topnav">')
       expect(response.body).to include('<h1>Your Pending Stay Requests:</h1>')
       expect(response.body).to include('<h2>Space Name: Lovely Cottage</h2>')
     end
@@ -180,6 +187,7 @@ describe ApplicationController do
       post '/login', { username: 'abodian', password: 'test' }
       response = get('/rentals-management')
       expect(response.status).to eq(200)
+      expect(response.body).to include('   <div class="topnav">')
       expect(response.body).to include('Your rentals:')
       expect(response.body).to include('Lovely Cottage')
     end
