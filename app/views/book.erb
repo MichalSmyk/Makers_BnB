@@ -1,5 +1,11 @@
+ <div class="topnav">
+  <a href="/">Home</a>
+  <a href="myaccount">My account</a>
+ </div>
+
 <h1>Book a Space</h1>
 <h2><%= @space.name %></h2>
+
 
 <form action="/space/book/<%= @space.id %>" method="post">
   <label for="date">Choose a date:</label>
