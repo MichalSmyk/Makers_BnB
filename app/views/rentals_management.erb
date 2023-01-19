@@ -11,5 +11,28 @@
       <h2>Space Name: <%= rental.name %> - <%= rental.description %> </h2>
       <% end %>
       <br>
+  
+  <h1>Pending Requests for Your Spaces</h1>
+    <%@owner_pending.each do |booking| %>
+    <p>Space Name: <%= booking.space.name %><br>
+    Booking Requested For: <%= booking.stay_date.strftime("%d/%m/%Y") %><br>
+    Request Made On: <%= booking.request_time.strftime("%d/%m/%Y") %><br>
+    <%= booking.request_approval%></p>
+    <form action="/rentals-management" method="post">
+    <label for="date">Change Booking Status</label>
+    <select id="Status" name="request_approval">
+      <% @request_approval.each do |status| %>
+        <option value="<%= status %>"><%= status %></option>
+      <% end %>
+    </select>
+    <br>
+    <input type="hidden" name="request_time" value="<%= Time.now %>">
+    <input type="hidden" name="space_id" value="<%= @space.id %>">
+    <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+    <input type="submit" value="Book">
+  </form>
+
+    <%end%>
   </body>
+
 </html>

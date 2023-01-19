@@ -74,4 +74,15 @@ module SessionHelper
     @user_declined_stays = Booking.where(user_id: current_user.id, request_approval: 3)
     @user_previous_stays = Booking.where(user_id: current_user.id, stay_date: Time.now.midnight-1.day..Time.now.midnight)
   end
+
+  def owner_pending_approval
+    @owner_pending = []
+    pending_stays = Booking.all
+    pending_stays.each do |booking|
+      if booking.space.user_id == current_user.id
+        @owner_pending << booking
+      end
+    end
+    @approval_status = Booking.all.request_approval
+  end
 end
