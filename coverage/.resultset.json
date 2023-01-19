@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
+
         "lines": [
           1,
           1,
@@ -13,7 +13,7 @@
           1,
           1,
           null,
-          21,
+
           1,
           1,
           1,
@@ -28,6 +28,7 @@
           1,
           1,
           1,
+
           null,
           null,
           1,
@@ -99,7 +100,7 @@
           null,
           1,
           1,
-          1,
+
           null,
           null,
           null,
@@ -128,9 +129,9 @@
           null,
           1,
           1,
+
           1,
           null,
-          1,
           1,
           1,
           null,
@@ -139,6 +140,7 @@
           1,
           1,
           1,
+
           null,
           1,
           1,
@@ -150,6 +152,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
@@ -169,7 +172,7 @@
           1,
           1,
           1,
-          1,
+
           null,
           null,
           null,
@@ -187,7 +190,6 @@
           null,
           null,
           null,
-          1,
           1,
           1,
           1,
@@ -195,6 +197,7 @@
           1,
           1,
           1,
+
           null,
           null,
           1,
@@ -206,7 +209,7 @@
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
+
         "lines": [
           1,
           1,
@@ -228,13 +231,7 @@
           null,
           null,
           1,
-          4,
-          4,
-          null,
-          null,
-          1,
-          9,
-          9,
+
           null,
           null,
           1,
@@ -310,7 +307,7 @@
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/config/environment.rb": {
+
         "lines": [
           1,
           null,
@@ -326,24 +323,7 @@
           1
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/helpers/session_helper.rb": {
-        "lines": [
-          1,
-          1,
-          9,
-          null,
-          null,
-          1,
-          7,
-          null,
-          null,
-          1,
-          9,
-          9,
-          9,
-          null,
-          8,
-          8,
+
           null,
           null,
           1,
@@ -400,7 +380,7 @@
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/booking.rb": {
+
         "lines": [
           1,
           1,
@@ -408,7 +388,7 @@
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/space.rb": {
+
         "lines": [
           1,
           1,
@@ -416,7 +396,7 @@
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/space_date.rb": {
+
         "lines": [
           1,
           1,
@@ -424,7 +404,7 @@
           null
         ]
       },
-      "/Users/michalsmyk/makers/makersbnb-ruby-seed/app/models/user.rb": {
+
         "lines": [
           1,
           null,
@@ -437,6 +417,6 @@
         ]
       }
     },
-    "timestamp": 1674143568
+
   }
 }

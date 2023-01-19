@@ -24,6 +24,12 @@ describe ApplicationController do
       response = get('/')
       expect(response.body).to include 'Lovely Cottage'
     end
+    it 'includes a link to your account page after logging in' do
+      post 'login', { username: 'abodian', password: 'test'}
+      response = get('/')
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<div><a href='/myaccount'>My account</a></div>")
+    end
   end
   context 'POST to /login' do
     it 'logs in with valid credentials' do
