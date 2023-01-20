@@ -19,10 +19,12 @@ body {
     margin-left: 350px;
     margin-right: 350px;
   }
-  .font{
+  .size{
     text-align: center;
     font-family: monospace;
-    font-size: 30px;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: 25px;
     background-color: white;
     text-shadow: orangered;
 
