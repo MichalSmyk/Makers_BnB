@@ -123,4 +123,13 @@ class ApplicationController < Sinatra::Base
       erb(:unauthorised)
     end
   end
+
+  get '/rentals/add' do
+    erb(:rentals_add)
+  end
+
+  post '/rentals/add' do
+    create_new_rental
+    erb(:rental_created)
+  end
 end

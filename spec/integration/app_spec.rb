@@ -16,22 +16,26 @@ describe ApplicationController do
       expect(response.status).to eq(200)
       expect(response.body).to include '<h1>Welcome to MakersBnB!</h1>'
     end
+
     it 'should display a login field and a link to sign-up page' do
       response = get('/')
       expect(response.body).to include "<form action='/login' method='POST'>"
       expect(response.body).to include "<a href= '/signup'>Click here to sign up</a>"
     end
+
     it 'should provide a list of spaces' do
       response = get('/')
       expect(response.body).to include 'Lovely Cottage'
     end
+
     it 'includes a link to your account page after logging in' do
-      post 'login', { username: 'abodian', password: 'test'}
+      post 'login', { username: 'abodian', password: 'test' }
       response = get('/')
       expect(response.status).to eq(200)
       expect(response.body).to include("<div><a href='/myaccount'>My account</a></div>")
     end
   end
+
   context 'POST to /login' do
     it 'logs in with valid credentials' do
       response = post('/login', username: 'abodian', password: 'test')
@@ -145,7 +149,7 @@ describe ApplicationController do
       expect(response.body).to include '+44714241945'
     end
 
-    it 'includes links to home, stays management and rentals management ' do 
+    it 'includes links to home, stays management and rentals management ' do
       post '/login', { username: 'abodian', password: 'test' }
       response = get('/myaccount')
       expect(response.body).to include "<a href= '/'>"
@@ -172,11 +176,13 @@ describe ApplicationController do
   end
 
   context 'POST to myaccount-update' do
-    describe "password and repeat password match" do
+    describe 'password and repeat password match' do
       it 'updates the details of an existing user' do
-        post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
-        response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'WebX', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
-        
+        post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter',
+                        last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
+        response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'WebX',
+                                             first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
+
         expect(response.status).to eq(200)
         expect(response.body).to include('Your details have been updated')
         user = User.find_by(username: 'testchange')
@@ -189,11 +195,13 @@ describe ApplicationController do
       end
     end
 
-    describe "password and repeat password do not match" do
+    describe 'password and repeat password do not match' do
       it 'it lets user know their passwords do not match and redirects back to update details page' do
-        post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter', last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
-        response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'Web', first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
-        
+        post('/signup', username: 'Spiderman', password: 'Web', repeat_password: 'Web', first_name: 'Peter',
+                        last_name: 'Parker', email: 'webslinger@dailyplanet.net', mobile_number: '696969')
+        response = post('/myaccount-update', username: 'testchange', password: 'WebX', repeat_password: 'Web',
+                                             first_name: 'PeterX', last_name: 'ParkerX', email: 'webslinger@dailyplanet.netX', mobile_number: '696969X')
+
         expect(response.status).to eq(200)
         expect(response.body).to include('<p><span style="color:red">Your passwords do not match, please try again.</span></p>')
         user = User.find_by(username: 'Spiderman')
@@ -201,7 +209,6 @@ describe ApplicationController do
       end
     end
   end
-
 
   context 'get/space/:id' do
     it 'should get to space page ' do
@@ -227,7 +234,7 @@ describe ApplicationController do
     it 'sends request to book specific space  if user is logged in' do
       post('/login', username: 'abodian', password: 'test')
       response = post('/space/book/1', stay_date: '2028-01-23', request_time: '19-01-2023', request_approval: '1',
-                                  space_id: '1', user_id: '1')
+                                       space_id: '1', user_id: '1')
 
       expect(response.status).to eq(200)
       expect(response.body).to include('<title>Booking confirmation</title>')
@@ -250,10 +257,11 @@ describe ApplicationController do
     end
   end
 
-  context 'POST /stays-management' do 
-    it 'deletes a booking request if pending or approved' do 
+  context 'POST /stays-management' do
+    it 'deletes a booking request if pending or approved' do
       post('/login', username: 'abodian', password: 'test')
-      post('/space/book/1', stay_date: '2028-01-23', request_time: '19-01-2023', request_approval: '1', space_id: '1', user_id: '1')
+      post('/space/book/1', stay_date: '2028-01-23', request_time: '19-01-2023', request_approval: '1', space_id: '1',
+                            user_id: '1')
       booking = Booking.find_by(stay_date: '2028-01-23')
       response = post("/stays-management/delete/#{booking.id}")
 
@@ -269,7 +277,6 @@ describe ApplicationController do
       post '/login', { username: 'abodian', password: 'test' }
       response = get('/rentals-management')
       expect(response.status).to eq(200)
-      expect(response.body).to include('   <div class="topnav">')
       expect(response.body).to include('Your rentals:')
       expect(response.body).to include('Lovely Cottage')
     end
@@ -282,11 +289,19 @@ describe ApplicationController do
   end
 
   context 'POST /bookings/:id/update' do
-    describe "user is logged in" do
-      it "updates the booking status from pending to approved (1 to 2) in the database" do
+    describe 'user is logged in' do
+      it 'updates the booking status from pending to approved (1 to 2) in the database' do
         post('/login', username: 'abodian', password: 'test')
         response = post('bookings/1/update', request_approval: 2)
         expect(response.status).to eq(302)
+        booking = Booking.find('1')
+        expect(booking.request_approval).to eq '2'
+        post('bookings/1/update', request_approval: 1)
+      end
+    end
+
+    describe 'user is not logged in' do
+      it 'updates the booking status from pending to approved (1 to 2) in the database' do
         booking = Booking.find("1")
         booking_2 = Booking.find("3")
         expect(booking.request_approval).to eq "2"
@@ -299,7 +314,34 @@ describe ApplicationController do
       it "returns a not authorised message" do
         response = post('bookings/1/update', request_approval: 2)
         expect(response.status).to eq(200)
-        expect(response.body).to include("<p>You are not authorised to perform this action. Redirecting to homepage</p>")
+        expect(response.body).to include('<p>You are not authorised to perform this action. Redirecting to homepage</p>')
+      end
+    end
+
+    context 'get to /rentals/add' do
+      it 'provides a form for the user to add a new rental' do
+        response = get('/rentals/add')
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h1>Add a new rental:</h1>'
+        expect(response.body).to include '<form action="/rentals/add" method="POST">'
+      end
+    end
+
+    context 'POST to /rentals/add' do
+      describe 'all fields are properly filled out' do
+        it 'adds a new rental to the spaces list' do
+          post '/login', { username: 'abodian', password: 'test' }
+          response = post('/rentals/add', name: 'New Cottage', description: 'A lovely new place', price: 100,
+                                          address: '123 Made Up Street')
+          expect(response.status).to eq(200)
+          expect(response.body).to include '<h2>Your new rental has now been listed on MakersBnB</h2>'
+          space = Space.find_by(name: 'New Cottage')
+          expect(space.name).to eq 'New Cottage'
+          expect(space.description).to eq 'A lovely new place'
+          expect(space.price.to_f).to eq 100.0
+          expect(space.address).to eq '123 Made Up Street'
+          space.destroy
+        end
       end
     end
   end

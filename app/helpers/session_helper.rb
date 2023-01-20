@@ -76,6 +76,11 @@ module SessionHelper
                                          stay_date: Time.now.midnight - 1.day..Time.now.midnight)
   end
 
+  def create_new_rental
+    Space.create(name: params[:name], description: params[:description],
+                 price: params[:price], address: params[:address], user_id: current_user.id)
+  end
+
   def booking_status_update
     @booking.update(request_approval: params[:request_approval])
     redirect '/rentals-management'
