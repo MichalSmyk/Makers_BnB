@@ -1,15 +1,18 @@
-<html>
-  <body>
-   <div class="topnav">
+<title>Rentals management for <%=current_user.username%></title>
+
+ <body>
+  <div class="topnav">
   <a href="/">Home</a>
   <a href="/myaccount">My account</a>
  </div>
-  <title>Welcome to your Rentals Management Page</title>
-  <h1>Your rentals:</h1>
-  <a href='/rentals/add'> Add new rental </a>
+  <h1>Welcome to your Rentals Management Page</h1>
+  <a href='/rentals/add'> Add a new rental</a>
+  <h2>Your rentals:</h2>
+  <ul>
   <% @user_rentals.each do |rental| %>
-      <h2>Space Name: <%= rental.name %> - <%= rental.description %> </h2>
+      <h3><li> <a href='/spaces/<%=rental.id%>'><%= rental.name %></a> - <%= rental.description %> </li></h3>
       <% end %>
+      </ul>
       <br>
   </body>
 </html>
