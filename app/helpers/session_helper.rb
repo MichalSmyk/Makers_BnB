@@ -78,7 +78,7 @@ module SessionHelper
 
   def create_new_rental
     Space.create(name: params[:name], description: params[:description],
-                 price: params[:price], address: params[:address])
+                 price: params[:price], address: params[:address], user_id: current_user.id)
   end
 
   def booking_status_update
