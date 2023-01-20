@@ -88,23 +88,29 @@ Booking.create(
 )
 SpaceDate.create(
   date_available: "20/01/23",
-  space_id: "1"
+
+  space_id: "1",
+  available?: "1"
 )
 SpaceDate.create(
   date_available: "21/01/23",
-  space_id: "1"
+  space_id: "1",
+  available?: "2"
 )
 SpaceDate.create(
   date_available: "22/01/23",
-  space_id: "1"
+  space_id: "1",
+  available?: "1"
 )
 SpaceDate.create(
   date_available: "30/01/23",
-  space_id: "2"
+  space_id: "2",
+  available?: "1"
 )
 SpaceDate.create(
   date_available: "03/02/23",
-  space_id: "3"
+  space_id: "3",
+  available?: "1"
 )
 
 20.times do
@@ -141,7 +147,8 @@ end
 20.times do
   SpaceDate.create(
     date_available: Faker::Date.forward(days: 100),
-    space_id: Faker::Number.between(from: 1, to: 5)
+    space_id: Faker::Number.between(from: 1, to: 5),
+    available?: Faker::Number.between(from: 1, to: 2)
   )
 end
 

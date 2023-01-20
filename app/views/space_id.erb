@@ -16,10 +16,13 @@
     </p> 
   <p>
     <strong> Availability: </strong></p>
-     <%@dates.each do |date| 
-       formatted_date = date.date_available.strftime("%d-%m-%Y") %>
-        <%= formatted_date %><br>
-      <%end%></p>
+    <%@dates.each do |date|%>
+      <%if date.available? == "1"%>
+        <%="#{date.date_available.strftime("%d-%m-%Y")}" %><br>
+      <%elsif date.available? == "2"%>
+        <%="#{date.date_available.strftime("%d-%m-%Y")} - Booked" %><br>
+      <%end%>
+    <%end%></p>
 
       <strong>Description:</strong> <%= @space.description %> <br>
       <strong>Price:</strong> <%= "£#{'%.2f' % @space.price}" %>
