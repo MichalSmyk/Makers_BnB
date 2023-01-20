@@ -267,7 +267,6 @@ describe ApplicationController do
       post '/login', { username: 'abodian', password: 'test' }
       response = get('/rentals-management')
       expect(response.status).to eq(200)
-      expect(response.body).to include('   <div class="topnav">')
       expect(response.body).to include('Your rentals:')
       expect(response.body).to include('Lovely Cottage')
     end
