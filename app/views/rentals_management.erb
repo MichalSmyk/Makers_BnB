@@ -9,8 +9,8 @@
 
   <% @user_rentals.each do |rental| %>
       <h2>Space Name: <%= rental.name %> - <%= rental.description %> </h2>
-      
-      <% rental.bookings.each do |booking| %>
+      <% rental_bookings = rental.bookings.sort_by { |booking| booking.stay_date } %>
+      <% rental_bookings.each do |booking| %>
         <p>Stay date: <%= booking.stay_date.strftime("%d-%m-%Y") %></p>
         <p>Request time: <%= booking.request_time.strftime("%d-%m-%Y") %></p>
         <p>Request status:

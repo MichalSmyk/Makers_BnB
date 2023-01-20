@@ -88,6 +88,7 @@ Booking.create(
 )
 SpaceDate.create(
   date_available: "20/01/23",
+
   space_id: "1",
   available?: "1"
 )
@@ -111,7 +112,6 @@ SpaceDate.create(
   space_id: "3",
   available?: "1"
 )
-
 
 20.times do
   User.create(
