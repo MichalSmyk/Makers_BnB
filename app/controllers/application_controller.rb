@@ -111,4 +111,13 @@ class ApplicationController < Sinatra::Base
      erb(:not_logged_in)
     end
   end
+
+  post '/bookings/:id/update' do
+    @booking = Booking.find(params[:id])
+    if logged_in?
+      booking_status_update
+    else
+      erb(:unauthorised)
+    end
+  end
 end
