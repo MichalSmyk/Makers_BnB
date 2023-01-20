@@ -60,7 +60,7 @@ module SessionHelper
 
   def book_space_date_choice
     @space = Space.find(params[:id])
-    @dates = SpaceDate.where(space_id: params[:id]).select(:date_available).distinct.pluck(:date_available)
+    @dates = SpaceDate.where(space_id: params[:id], available?: "1").select(:date_available).distinct.pluck(:date_available)
   end
 
   def create_new_booking
