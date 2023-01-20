@@ -24,12 +24,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    if log_in_empty?
+    if log_in
+      erb(:index_redirect)
+    else
       @spaces = Space.all
       erb(:home_page_with_login_error)
-    else
-      log_in
-      erb(:index_redirect)
     end
   end
 
@@ -96,7 +95,6 @@ class ApplicationController < Sinatra::Base
     erb(:booking_confirmation)
   end
 
-
   get '/stays-management' do
     stays_approval_status
     erb(:stays_management)
@@ -113,7 +111,7 @@ class ApplicationController < Sinatra::Base
       @user_rentals = Space.where(user_id: current_user.id)
       erb(:rentals_management)
     else
-     erb(:not_logged_in)
+      erb(:not_logged_in)
     end
   end
 
