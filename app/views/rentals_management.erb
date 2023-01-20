@@ -10,7 +10,42 @@
 
   <% @user_rentals.each do |rental| %>
       <h2>Space Name: <br> <div class="size"><%= rental.name %> - <%= rental.description %></div></h2>
-      <% end %>
+      <h2>Space Name: <%= rental.name %> - <%= rental.description %> </h2>
+      <% rental_bookings = rental.bookings.sort_by { |booking| booking.stay_date } %>
+      <% rental_bookings.each do |booking| %>
+        <p>Stay date: <%= booking.stay_date.strftime("%d-%m-%Y") %></p>
+        <p>Request time: <%= booking.request_time.strftime("%d-%m-%Y") %></p>
+        <p>Request status:
+          <% if booking.request_approval == "1" %>
+            Pending
+          <% elsif booking.request_approval == "2" %>
+            Approved
+          <% else %>
+            Declined
+          <% end %>
+        </p>
+
+        <p>Change request status:
+        <form action="/bookings/<%= booking.id %>/update" method="post">
+          <select name="request_approval">
+            <% if booking.request_approval == "1" %>
+              <option value="1" selected>Pending</option>
+              <option value="2">Approved</option>
+              <option value="3">Declined</option>
+            <% elsif booking.request_approval == "2" %>
+              <option value="1">Pending</option>
+              <option value="2" selected>Approved</option>
+              <option value="3">Declined</option>
+            <% else %>
+              <option value="1">Pending</option>
+              <option value="2">Approved</option>
+              <option value="3" selected>Declined</option>
+            <% end %>
+          </select>
+          <input type="submit" value="Submit">
+        </form>
+      <% end %></p>
       <br>
+  <% end %>
   </body>
 </html>
