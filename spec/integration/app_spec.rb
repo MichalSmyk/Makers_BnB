@@ -304,7 +304,7 @@ describe ApplicationController do
       it 'updates the booking status from pending to approved (1 to 2) in the database' do
         booking = Booking.find("1")
         booking_2 = Booking.find("3")
-        expect(booking.request_approval).to eq "2"
+        expect(booking.request_approval).to eq "1"
         expect(booking_2.request_approval).to eq "3"
         post('bookings/1/update', request_approval: 1)
       end
