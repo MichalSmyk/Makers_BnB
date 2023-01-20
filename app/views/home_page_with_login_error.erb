@@ -1,0 +1,37 @@
+<head> <link rel="stylesheet" href="style.css"/> </head>
+
+<body>
+<div class="container" >
+<% if logged_in? %>
+        <div>You are logged in as: <%= current_user.username %></div>
+            <div><a href='/myaccount'>My account</a></div>
+        <p><a href="/logout">Sign Out</a></p>
+      <% else %>
+        <form action='/login' method='POST'>
+          <div class='form-group'>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+          </div>
+          <div class='form-group'>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+          </div>
+          <input class='button' type="submit" value="Log in!">
+        </form><p><span style="color:red">You did not enter your details. Please try again.</span></p>
+  <a href= '/signup'>Click here to sign up</a>
+  <% end %>
+
+<h1>Welcome to MakersBnB!</h1>
+
+  <h2>Check out these spaces below:</h2>
+  <ul><% @spaces.each do |space| %>
+     <li><a href = '/space/<%=space.id%>'><%= space.name %></a> </li>
+  <% end %>
+ </ul>
+ </div>
+
+</body>
+
+   <footer class="center">
+        <p class="center">Made with ❤️ from team first-rule-of-git-club </p>
+    </footer>
