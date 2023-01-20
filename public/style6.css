@@ -19,6 +19,14 @@ body {
     margin-left: 350px;
     margin-right: 350px;
   }
+  .font{
+    text-align: center;
+    font-family: monospace;
+    font-size: 30px;
+    background-color: white;
+    text-shadow: orangered;
+
+  }
 
   a {
     color: orangered;

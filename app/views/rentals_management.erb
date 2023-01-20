@@ -9,7 +9,7 @@
   <h1>Your rentals:</h1>
 
   <% @user_rentals.each do |rental| %>
-      <h2>Space Name: <%= rental.name %> - <%= rental.description %> </h2>
+      <h2>Space Name: <br> <div class="size"><%= rental.name %> - <%= rental.description %></div></h2>
       <% end %>
       <br>
   </body>
