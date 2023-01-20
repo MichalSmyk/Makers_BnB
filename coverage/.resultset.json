@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-
+      "/Users/josephburgess/Projects/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
         "lines": [
           1,
           1,
@@ -14,21 +14,24 @@
           1,
           1,
           null,
-
+          31,
           1,
           1,
           1,
           1,
           1,
           null,
+          null,
           1,
           1,
           1,
           1,
           null,
+          null,
           1,
           1,
           1,
+          null,
           null,
           1,
           1,
@@ -37,6 +40,7 @@
           1,
           null,
           null,
+          null,
           1,
           1,
           1,
@@ -174,8 +178,10 @@
           1,
           1,
           1,
+          null,
           1,
           null,
+          null,
           1,
           1,
           1,
@@ -191,8 +197,10 @@
           1,
           1,
           1,
+          null,
           1,
           null,
+          null,
           1,
           1,
           1,
@@ -201,7 +209,6 @@
           null,
           null,
           null,
-          null,
           1,
           1,
           1,
@@ -219,18 +226,30 @@
           1,
           1,
           1,
+          null,
           null,
+          null,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
           1,
+          1,
+          null,
           1,
           1,
           1,
           null,
           null,
+          null,
+          1,
           1,
           1,
+          1,
           null,
+          1,
           1,
           1,
           1,
@@ -244,42 +263,81 @@
           null,
           1,
           1,
+          null,
+          1,
+          1,
           1,
           1,
           null,
           null,
           null,
+          1,
+          1,
+          1,
+          1,
           1,
           1,
           1,
+          null,
+          null,
+          1,
           1,
           1,
           1,
           null,
+          null,
+          null,
+          1,
+          1,
           1,
           1,
           1,
           1,
+          1,
+          1,
+          1,
           null,
           null,
           null,
           1,
           1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
           1,
           1,
           1,
           1,
           1,
           1,
+          null,
           null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
+          1,
+          1,
           1,
           1,
           1,
           1,
+          1,
+          1,
+          null,
+          null,
           null,
           null,
-
+          null
+        ]
+      },
+      "/Users/josephburgess/Projects/makersbnb-ruby-seed/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -307,7 +365,8 @@
           null,
           null,
           1,
-
+          15,
+          15,
           null,
           null,
           1,
@@ -373,7 +432,6 @@
           0,
           null,
           null,
-          null,
           1,
           1,
           1,
@@ -388,14 +446,33 @@
           1,
           2,
           1,
-
           1,
           null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          3,
+          3,
+          2,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
           null,
           null
         ]
       },
-
+      "/Users/josephburgess/Projects/makersbnb-ruby-seed/config/environment.rb": {
         "lines": [
           1,
           null,
@@ -411,15 +488,25 @@
           1
         ]
       },
-
+      "/Users/josephburgess/Projects/makersbnb-ruby-seed/app/helpers/session_helper.rb": {
+        "lines": [
+          1,
+          1,
+          14,
           null,
           null,
           1,
-          43,
+          44,
           null,
           null,
           1,
-
+          15,
+          15,
+          15,
+          null,
+          14,
+          14,
+          null,
           null,
           1,
           6,
@@ -479,7 +566,21 @@
           1,
           1,
           null,
-
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/josephburgess/Projects/makersbnb-ruby-seed/app/models/booking.rb": {
         "lines": [
           1,
           1,
@@ -487,12 +588,16 @@
           null
         ]
       },
-
+      "/Users/josephburgess/Projects/makersbnb-ruby-seed/app/models/space.rb": {
         "lines": [
           1,
           1,
           1,
-
+          1,
+          null
+        ]
+      },
+      "/Users/josephburgess/Projects/makersbnb-ruby-seed/app/models/space_date.rb": {
         "lines": [
           1,
           1,
@@ -500,7 +605,7 @@
           null
         ]
       },
-
+      "/Users/josephburgess/Projects/makersbnb-ruby-seed/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -513,6 +618,6 @@
         ]
       }
     },
-
+    "timestamp": 1674222539
   }
 }
