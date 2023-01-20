@@ -8,16 +8,12 @@ module SessionHelper
   end
 
   def log_in
-      user = User.find_by(username: params[:username])
-      return false if user.nil?
-      return false unless BCrypt::Password.new(user.password_digest) == params[:password]
+    user = User.find_by(username: params[:username])
+    return false if user.nil?
+    return false unless BCrypt::Password.new(user.password_digest) == params[:password]
 
-      session[:user_id] = user.id
-      true
-  end
-
-  def log_in_empty?
-    params[:username] == '' || params[:email] == ''
+    session[:user_id] = user.id
+    true
   end
 
   def sign_up_field_empty?
@@ -47,7 +43,7 @@ module SessionHelper
 
   def update_user_details
     @user = current_user.update(username: params[:username], email: params[:email],
-      password: params[:password], first_name: params[:first_name], last_name: params[:last_name], mobile_number: params[:mobile_number])
+                                password: params[:password], first_name: params[:first_name], last_name: params[:last_name], mobile_number: params[:mobile_number])
 
     current_user.password = params[:password]
   end
@@ -68,15 +64,16 @@ module SessionHelper
   end
 
   def create_new_booking
-    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time], 
-      space_id: params[:space_id], user_id: params[:user_id], request_approval: '1')
+    @booking = Booking.create(stay_date: params[:stay_date], request_time: params[:request_time],
+                              space_id: params[:space_id], user_id: params[:user_id], request_approval: '1')
   end
 
   def stays_approval_status
     @user_pending_stays = Booking.where(user_id: current_user.id, request_approval: 1)
     @user_approved_stays = Booking.where(user_id: current_user.id, request_approval: 2)
     @user_declined_stays = Booking.where(user_id: current_user.id, request_approval: 3)
-    @user_previous_stays = Booking.where(user_id: current_user.id, stay_date: Time.now.midnight-1.day..Time.now.midnight)
+    @user_previous_stays = Booking.where(user_id: current_user.id,
+                                         stay_date: Time.now.midnight - 1.day..Time.now.midnight)
   end
 
   def booking_status_update
