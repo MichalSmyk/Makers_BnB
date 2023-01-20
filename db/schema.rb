@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_16_173227) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_20_115317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_173227) do
   create_table "space_dates", force: :cascade do |t|
     t.datetime "date_available", precision: nil
     t.integer "space_id"
+    t.string "available?"
   end
 
   create_table "spaces", force: :cascade do |t|

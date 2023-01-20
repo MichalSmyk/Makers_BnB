@@ -219,7 +219,7 @@ describe ApplicationController do
 
       expect(response.status).to eq(200)
       expect(response.body).to include(' <div class="topnav">')
-      expect(response.body).to include('      <option value="2028-01-23 00:00:00 UTC">23-01-2028</option>')
+      expect(response.body).to include('      <option value="2022-01-23 00:00:00 UTC">23-01-2022</option>')
     end
   end
 
@@ -260,7 +260,7 @@ describe ApplicationController do
       expect(response.status).to eq(200)
       expect(response.body).to include('<p>Your booking has been deleted...taking you back to your Stays Management page</p>')
       expect(response.body).to include('<meta http-equiv="refresh" content="3; url = /stays-management" />')
-      expect(Booking.all.length).to eq 23
+      expect(Booking.all.length).to eq 25
     end
   end
 
@@ -288,13 +288,15 @@ describe ApplicationController do
         response = post('bookings/1/update', request_approval: 2)
         expect(response.status).to eq(302)
         booking = Booking.find("1")
+        booking_2 = Booking.find("3")
         expect(booking.request_approval).to eq "2"
+        expect(booking_2.request_approval).to eq "3"
         post('bookings/1/update', request_approval: 1)
       end
     end
     
     describe "user is not logged in" do
-      it "updates the booking status from pending to approved (1 to 2) in the database" do
+      it "returns a not authorised message" do
         response = post('bookings/1/update', request_approval: 2)
         expect(response.status).to eq(200)
         expect(response.body).to include("<p>You are not authorised to perform this action. Redirecting to homepage</p>")
