@@ -282,9 +282,9 @@ describe ApplicationController do
         response = post('bookings/1/update', request_approval: 2)
         expect(response.status).to eq(302)
         booking = Booking.find("1")
-        booking_2 = Booking.find("15")
+        booking_2 = Booking.find("3")
         expect(booking.request_approval).to eq "2"
-        expect(booking_2.request_approval).to eq "1"
+        expect(booking_2.request_approval).to eq "3"
         post('bookings/1/update', request_approval: 1)
       end
     end
