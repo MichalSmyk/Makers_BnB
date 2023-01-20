@@ -39,6 +39,12 @@ describe ApplicationController do
       expect(response.body).to include 'Logged In Successfully!'
     end
 
+   it 'returns to homepage bearing error message if no login details entered' do
+      response = post('/login', username: '', password: '')
+      expect(last_response.status).to eq(200)
+      expect(response.body).to include 'You did not enter your details. Please try again.'
+    end
+
     it 'remains logged in when navigating site' do
       post '/login', { username: 'abodian', password: 'test' }
       response = get('/')

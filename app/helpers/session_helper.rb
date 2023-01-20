@@ -8,12 +8,16 @@ module SessionHelper
   end
 
   def log_in
-    user = User.find_by(username: params[:username])
-    return false if user.nil?
-    return false unless BCrypt::Password.new(user.password_digest) == params[:password]
+      user = User.find_by(username: params[:username])
+      return false if user.nil?
+      return false unless BCrypt::Password.new(user.password_digest) == params[:password]
 
-    session[:user_id] = user.id
-    true
+      session[:user_id] = user.id
+      true
+  end
+
+  def log_in_empty?
+    params[:username] == '' || params[:email] == ''
   end
 
   def sign_up_field_empty?

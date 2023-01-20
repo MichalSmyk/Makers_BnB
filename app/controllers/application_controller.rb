@@ -24,8 +24,13 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    log_in
-    erb(:index_redirect)
+    if log_in_empty?
+      @spaces = Space.all
+      erb(:home_page_with_login_error)
+    else
+      log_in
+      erb(:index_redirect)
+    end
   end
 
   get '/logout' do
