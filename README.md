@@ -1,3 +1,17 @@
+# Collaborators 
+[Alex](https://github.com/abodian)
+
+[David](https://github.com/sirdavy)
+
+[Joe](https://github.com/josephburgess)
+
+[Abbas](https://github.com/IAmNotAbbas)
+
+[Chioma](https://github.com/UserChi)
+
+Myself
+
+
 ### ActiveRecord Local Project Setup
 
 1. Create databases (makersbnb-development, makersbnb-test)
